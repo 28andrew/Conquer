@@ -57,7 +57,7 @@
         </repository>
         <repository>
             <id>drtshock</id>
-            <url>http://ci.drtshock.net/plugin/repository/everything/</url>
+            <url>https://ci.drtshock.net/plugin/repository/everything/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
