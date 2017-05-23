@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Conquer.iml" filepath="$PROJECT_DIR$/Conquer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/factionsuuid/factionsuuid.iml" filepath="$PROJECT_DIR$/factionsuuid/factionsuuid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/implementations/implementations.iml" filepath="$PROJECT_DIR$/implementations/implementations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/massivecorefactions/massivecorefactions.iml" filepath="$PROJECT_DIR$/massivecorefactions/massivecorefactions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plugin/plugin.iml" filepath="$PROJECT_DIR$/plugin/plugin.iml" />
+    </modules>
+  </component>
+</project>

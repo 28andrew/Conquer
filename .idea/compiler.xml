@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="api" />
+        <module name="factionsuuid" />
+        <module name="implementations" />
+        <module name="massivecorefactions" />
+        <module name="plugin" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api" target="1.8" />
+      <module name="Conquer" target="1.5" />
+      <module name="factionsuuid" target="1.8" />
+      <module name="implementations" target="1.8" />
+      <module name="massivecorefactions" target="1.8" />
+      <module name="plugin" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

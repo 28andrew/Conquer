@@ -1,0 +1,12 @@
+name: Conquer
+main: me.andrew28.addons.conquer.Conquer
+version: ${pom.version}
+
+author: xXAndrew28Xx
+
+softdepend: [Skript]
+depend: [Factions]
+
+commands:
+    conquer:
+        description: "The main command for the Skript addon Conquer"
