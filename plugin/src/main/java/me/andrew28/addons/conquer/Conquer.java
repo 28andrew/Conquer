@@ -14,8 +14,8 @@ import java.util.Arrays;
 public class Conquer extends Addon{
     private static Conquer instance;
 
-    private FactionsPlugin factionsPlugin;
-    private FactionsPluginType factionsPluginType;
+    private FactionsPlugin factionsPlugin = null;
+    private FactionsPluginType factionsPluginType = null;
     public static Conquer getInstance() {
         return instance;
     }
@@ -74,4 +74,21 @@ public class Conquer extends Addon{
     public FactionsPluginType getFactionsPluginType() {
         return factionsPluginType;
     }
+    
+    /**
+     * Set the faction plugin class to use.
+     * @param factionsPlugin The faction plugin class to use.
+     */
+    public void setFactionsPlugin(FactionsPlugin factionsPlugin) {
+        this.factionsPlugin = factionsPlugin;
+    }
+    
+    /**
+     * Set the faction plugin type.
+     * @param factionsPluginType The faction plugin type.
+     */
+    public void setFactionsPluginType(FactionsPluginType factionsPluginType) {
+        this.factionsPluginType = factionsPluginType;
+    }
+    
 }

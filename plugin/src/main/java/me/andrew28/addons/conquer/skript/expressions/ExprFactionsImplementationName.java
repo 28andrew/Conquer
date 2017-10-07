@@ -19,6 +19,9 @@ import me.andrew28.addons.core.annotations.*;
 public class ExprFactionsImplementationName extends ASAExpression<String>{
     @Override
     public String getValue() throws NullExpressionException {
+        if (Conquer.getInstance().getFactionsPluginType() == null){
+        	    return null;
+        }
         return Conquer.getInstance().getFactionsPluginType().getFriendlyName();
     }
 }
