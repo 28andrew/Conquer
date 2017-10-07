@@ -11,7 +11,9 @@ public enum FactionsPluginType {
     ORIGINAL("Original Factions (Massive Core)", FactionsImpl.class),
     FACTIONS_ONE("Factions One (Sataniel)", null),
     FACTIONS_UUID("Factions UUID (drtshock)", FactionsUUIDImpl.class),
-    KINGDOMS("Kingdoms (Hex_27)", null);
+    KINGDOMS("Kingdoms (Hex_27)", null),
+    OTHER("Other", null);
+	
     String friendlyName;
     Class<? extends FactionsPlugin> pluginImpl;
 
