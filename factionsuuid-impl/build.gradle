@@ -1,6 +1,14 @@
 dependencies {
     compile project(':api')
-    compile (group: 'com.massivecraft', name: 'Factions', version: '1.6.9.5-U0.2.1-SNAPSHOT') {
+    compile(group: 'com.massivecraft', name: 'Factions', version: '1.6.9.5-U0.2.1-SNAPSHOT') {
         transitive = false
+    }
+}
+
+shadowJar {
+    archiveName = "mfactions-impl-${version}.${extension}"
+    dependencies {
+        exclude project(':api')
+        exclude dependency('com.massivecraft:Factions:1.6.9.5-U0.2.1-SNAPSHOT')
     }
 }

@@ -76,7 +76,6 @@ task allJar(type: Jar, dependsOn: subprojects.shadowJar) {
     }
 }
 
-// Make 'gradle build' run our allJar task
 jar.enabled = false
 build.dependsOn(allJar)
 

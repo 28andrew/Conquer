@@ -3,3 +3,12 @@ dependencies {
     compile name: 'MassiveCore'
     compile name: 'MassiveFactions'
 }
+
+shadowJar {
+    archiveName = "mfactions-impl-${version}.${extension}"
+    dependencies {
+        exclude project(':api')
+        exclude dependency(name: 'MassiveCore')
+        exclude dependency(name: 'MassiveFactions')
+    }
+}
