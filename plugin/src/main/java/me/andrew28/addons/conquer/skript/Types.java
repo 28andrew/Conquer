@@ -41,6 +41,10 @@ public class Types {
         Classes.registerClass(new ClassInfo<>(ConquerClaim.class, "conquerclaim")
                 .user("(conquer|faction)?claims?")
                 .name("Conquer Claim")
+                .description("Represents a claim (usually a chunk) which can be owned by the wilderness, " +
+                        "a safe zone, a war zone, or even a faction.")
+                .examples("set {_claim} to claim at player")
+                .usage("claim at %location/chunk%")
                 .parser(new Parser<ConquerClaim>() {
                     @Override
                     public String toString(ConquerClaim o, int flags) {
@@ -135,6 +139,9 @@ public class Types {
         Classes.registerClass(new ClassInfo<>(ConquerFaction.class, "conquerfaction")
                 .user("(conquer)?factions?")
                 .name("Conquer Faction")
+                .description("Represents a faction")
+                .examples("set {_faction} to faction of player")
+                .usage("faction of %player%")
                 .parser(new Parser<ConquerFaction>() {
                     @Override
                     public String toString(ConquerFaction o, int flags) {
@@ -205,6 +212,11 @@ public class Types {
         Classes.registerClass(new ClassInfo<>(ConquerPlayer.class, "conquerplayer")
                 .user("(conquer|faction)?-?players?")
                 .name("Conquer Player")
+                .description("Represents a faction player. An offline player/player" +
+                        " will be automatically converted to this type. So normal players" +
+                        " will work in all faction syntaxes")
+                .examples("set {_faction} to faction of player #syntax is faction of %conquerplayer%")
+                .usage("%offlineplayer/player%")
                 .parser(new Parser<ConquerPlayer>() {
                     @Override
                     public String toString(ConquerPlayer o, int flags) {
@@ -259,11 +271,25 @@ public class Types {
         Classes.registerClass(new ClassInfo<>(PowerHolder.class, "powerholder")
                 .user("(conquer|faction)?-?powerholders?")
                 .name("Power Holder")
+                .description("Represents something that holds power, this is a faction or a player.")
+                .examples(
+                        "set {_playerPower} to power of player",
+                        "set {_factionPower} to power of player's faction",
+                        "send \"You make up %({_playerPower} / {_factionPower}) * 100%%% of your faction's power\""
+                )
+                .usage("%conquerfaction/conquerplayer%")
         );
 
         Classes.registerClass(new ClassInfo<>(Relation.class, "factionrelation")
                 .user("(conquer|faction)?-?relations?")
                 .name("Faction Relation")
+                .description("Represents a relation that factions have been two people")
+                .examples(
+                        "on death of player",
+                        "\tif relation between victim's faction and attacker's faction is enemy:",
+                        "\t\tsubtract 100 from victim's balance"
+                )
+                .usage("member, ally, truce, neutral, enemy, other")
                 .parser(new EnumParser<>(Relation.class))
                 .serializer(new EnumSerializer<>(Relation.class)));
 
@@ -274,12 +300,16 @@ public class Types {
         Classes.registerClass(new ClassInfo<>(ConquerPlayer.Role.class, "conquerrole")
                 .user("(conquer|faction)?-?roles?")
                 .name("Player Role")
+                .description("Represents a role that a player may hold")
+                .usage("normal, admin, moderator, recruit, other")
                 .parser(new EnumParser<>(ConquerPlayer.Role.class))
                 .serializer(new EnumSerializer<>(ConquerPlayer.Role.class)));
 
         Classes.registerClass(new ClassInfo<>(ClaimType.class, "claimtype")
                 .user("(conquer)?claim-?types?")
                 .name("Claim Type")
+                .description("Represents who claimed a type")
+                .usage("wilderness, safe zone, war zone, faction")
                 .parser(new EnumParser<>(ClaimType.class))
                 .serializer(new EnumSerializer<>(ClaimType.class)));
     }

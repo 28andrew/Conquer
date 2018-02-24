@@ -15,7 +15,7 @@ allprojects {
     apply plugin: 'java'
 
     group 'me.andrew28.addons'
-    version '1.0.1'
+    version '1.0.2'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8

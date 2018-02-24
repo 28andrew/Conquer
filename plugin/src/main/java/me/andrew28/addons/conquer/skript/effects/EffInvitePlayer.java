@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.effects;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
@@ -17,6 +18,10 @@ import org.bukkit.event.Event;
 
 @Name("Invite/Deinvite Player From a Faction")
 @Description("Invite/Deinvite a player from a faction")
+@Examples({
+        "broadcast \"%player % says everyone should team up!\"",
+        "invite all players to the player's faction"
+})
 public class EffInvitePlayer extends Effect {
     static {
         Skript.registerEffect(EffInvitePlayer.class,

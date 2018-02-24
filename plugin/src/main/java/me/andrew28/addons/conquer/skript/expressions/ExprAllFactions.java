@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
@@ -17,6 +18,11 @@ import org.bukkit.event.Event;
  */
 @Name("All Factions")
 @Description("Gets all the factions")
+@Examples({
+        "send \"All Factions:\"",
+        "loop all factions:",
+        "\tsend \"- %loop-faction%\""
+})
 public class ExprAllFactions extends SimpleExpression<ConquerFaction> {
     static {
         Skript.registerExpression(ExprAllFactions.class, ConquerFaction.class, ExpressionType.SIMPLE,

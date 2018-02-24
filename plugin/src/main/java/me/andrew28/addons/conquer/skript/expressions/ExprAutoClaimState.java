@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import me.andrew28.addons.conquer.api.ConquerPlayer;
@@ -12,6 +13,10 @@ import org.bukkit.event.Event;
  */
 @Name("Auto Claim State of Player")
 @Description("Gets whether a player is auto claiming")
+@Examples({
+        "if auto claim state of player is true:",
+        "\t\"Fancy, aren't ya?\""
+})
 public class ExprAutoClaimState extends SimplePropertyExpression<ConquerPlayer, Boolean> {
     static {
         register(ExprAutoClaimState.class, Boolean.class,

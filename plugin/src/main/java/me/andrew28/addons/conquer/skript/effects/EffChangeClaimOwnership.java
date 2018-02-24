@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.effects;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
@@ -22,13 +23,16 @@ import java.util.List;
  */
 @Name("Claim for Faction")
 @Description("Claim land for a faction")
+@Examples({
+        "claim the land at player's location for player's faction"
+})
 public class EffChangeClaimOwnership extends Effect {
     static {
         Skript.registerEffect(EffChangeClaimOwnership.class,
-                "claim [the] [(land|claim|chunk)][s] %conquerclaims/locations% for" +
+                "claim [the] [(land|claim|chunk)][s] [at] %conquerclaims/locations% for" +
                         " [the] [faction][s] %conquerfaction%",
-                "claim [the] [(land|claim|chunk)][s] %conquerclaims/locations% for [the] %claimtype%",
-                "unclaim [the] [(land|claim|chunk)][s] %conquerclaims/locations%");
+                "claim [the] [(land|claim|chunk)][s] [at] %conquerclaims/locations% for [the] %claimtype%",
+                "unclaim [the] [(land|claim|chunk)][s] [at] %conquerclaims/locations%");
     }
 
     private boolean claiming;

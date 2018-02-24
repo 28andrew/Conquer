@@ -63,7 +63,10 @@ public class FactionEvents {
         /* Faction Create */
         Skript.registerEvent("Faction Create", SimpleEvent.class, ConquerFactionCreateEvent.class,
                 "faction creat(e|ion)")
-                .description("Called when a faction is created");
+                .description("Called when a faction is created")
+                .examples(
+                        "on faction create:",
+                        "\tbroadcast \"%event-string% has been created by %event-player%\"");
         EventValues.registerEventValue(ConquerFactionCreateEvent.class, Player.class, new Getter<Player, ConquerFactionCreateEvent>() {
             @Override
             public Player get(ConquerFactionCreateEvent event) {
@@ -81,22 +84,43 @@ public class FactionEvents {
         /* Faction Disband */
         Skript.registerEvent("Faction Disband", SimpleEvent.class, ConquerFactionDisbandEvent.class,
                 "faction (del(ete|ion)|disband)")
-                .description("Called when a faction is disbanded");
+                .description("Called when a faction is disbanded")
+                .examples(
+                        "on faction disband:",
+                        "\tcancel the event",
+                        "send \"Trololol, no disbanding!\" to event-player"
+                );
 
         /* Faction Player Join */
         Skript.registerEvent("Player Join Faction", SimpleEvent.class, ConquerFactionJoinEvent.class,
                 "faction player join")
-                .description("Called when a player joins a faction");
+                .description("Called when a player joins a faction")
+                .examples(
+                        "on faction player join",
+                        "\tloop members of event-faction:",
+                        "\t\tif loop-player is not event-player:",
+                        "\t\t\tsend \"&a%event-player% has joined your faction.\" to loop-player"
+                );
 
         /* Faction Player Leave */
         Skript.registerEvent("Player Leave Faction", SimpleEvent.class, ConquerFactionLeaveEvent.class,
                 "faction player leave")
-                .description("Called when a player leaves a faction");
+                .description("Called when a player leaves a faction")
+                .examples(
+                        "on faction player join",
+                        "\tloop members of event-faction:",
+                        "\t\tif loop-player is not event-player:",
+                        "\t\t\tsend \"&c%event-player% has left your faction. ;(\" to loop-player"
+                );
 
         /* Faction Relation Change */
         Skript.registerEvent("Faction Relation Change", SimpleEvent.class, ConquerFactionRelationEvent.class,
                 "[faction] relation change")
-                .description("Called when the relation between two factions change");
+                .description("Called when the relation between two factions change")
+                .examples(
+                        "on faction relation change:",
+                        "\tbroadcast \"%sender faction% changed their relation to %target faction% to %new relation%\""
+                );
         EventValues.registerEventValue(ConquerFactionRelationEvent.class, ConquerFaction[].class, new Getter<ConquerFaction[], ConquerFactionRelationEvent>() {
             @Override
             public ConquerFaction[] get(ConquerFactionRelationEvent event) {
@@ -125,7 +149,12 @@ public class FactionEvents {
         /* Faction Relation Change Wish */
         Skript.registerEvent("Faction Relation Change Wish", SimpleEvent.class,
                 ConquerFactionRelationWishEvent.class, "faction relation wish [change]")
-                .description("Called when a faction wishes to change their relation with another faction");
+                .description("Called when a faction wishes to change their relation with another faction")
+                .examples(
+                        "on faction relation wish:",
+                        "\tbroadcast \"%sender faction% wishes to change their" +
+                                " relation to %target faction% to %new relation%\""
+                );
         EventValues.registerEventValue(ConquerFactionRelationWishEvent.class, ConquerPlayer.class, new Getter<ConquerPlayer, ConquerFactionRelationWishEvent>() {
             @Override
             public ConquerPlayer get(ConquerFactionRelationWishEvent event) {
@@ -169,11 +198,19 @@ public class FactionEvents {
         /* Faction Power Loss Event */
         Skript.registerEvent("Power Loss", SimpleEvent.class, ConquerPowerLossEvent.class,
                 "[faction] [player] power los(s|t)")
-                .description("Called when a player loses some power");
+                .description("Called when a player loses some power")
+                .examples(
+                        "on player power loss:",
+                        "\tsend \"You have lost some power.\" to event-player"
+                );
 
         /* Faction Unclaim All Event */
         Skript.registerEvent("Faction Unclaim All Land", SimpleEvent.class, ConquerUnclaimAllEvent.class,
                 "[faction] (un|de)claim all [land]")
-                .description("Called when a faction unclaims all of their land");
+                .description("Called when a faction unclaims all of their land")
+                .examples(
+                        "on faction unclaim all land:",
+                        "\tbroadcast \"%event-faction% has unclaimed all of their land, RAIDDDD!\""
+                );
     }
 }

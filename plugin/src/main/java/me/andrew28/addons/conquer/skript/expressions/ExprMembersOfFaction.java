@@ -3,6 +3,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
@@ -22,6 +23,9 @@ import java.util.Set;
  */
 @Name("Members of Faction")
 @Description("The members of a faction")
+@Examples({
+        "remove player from player's faction"
+})
 public class ExprMembersOfFaction extends SimpleExpression<ConquerPlayer> {
     static {
         Skript.registerExpression(ExprMembersOfFaction.class, ConquerPlayer.class, ExpressionType.PROPERTY,

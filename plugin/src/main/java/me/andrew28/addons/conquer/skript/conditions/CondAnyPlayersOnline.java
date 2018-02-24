@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.conditions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
@@ -17,6 +18,13 @@ import java.util.Arrays;
  */
 @Name("Any Faction Players Online/Offline")
 @Description("Whether any players of a faction are online/offline")
+@Examples({
+        "send \"Online Factions:\"",
+        "loop all factions:",
+        "\tset {_faction} to loop-faction",
+        "\tif any faction players are online from {_faction}:",
+        "\t\tsend \"- %{_faction}%\""
+})
 public class CondAnyPlayersOnline extends Condition {
     static {
         Skript.registerCondition(CondAnyPlayersOnline.class,

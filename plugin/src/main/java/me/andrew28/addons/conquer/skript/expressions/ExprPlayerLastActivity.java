@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.skript.util.Date;
@@ -13,6 +14,11 @@ import org.bukkit.event.Event;
  */
 @Name("Last Activity of Faction Player")
 @Description("Gets the last activity of a faction player")
+@Examples({
+        "send \"Last Login Dates:\"",
+        "loop members of player's faction:",
+        "\tsend \"%loop-player%: %last login date of loop-player%\""
+})
 public class ExprPlayerLastActivity extends SimplePropertyExpression<ConquerPlayer, Date> {
     static {
         register(ExprPlayerLastActivity.class, Date.class,

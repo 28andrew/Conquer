@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.effects;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
@@ -15,6 +16,10 @@ import org.bukkit.event.Event;
  */
 @Name("Make Player Leave Faction")
 @Description("Force a player to leave their faction")
+@Examples({
+        "send \"You are being disowned, sorry.\"",
+        "make player leave their faction"
+})
 public class EffMakePlayerLeaveFaction extends Effect {
     static {
         Skript.registerEffect(EffMakePlayerLeaveFaction.class,

@@ -14,7 +14,12 @@ public class EvtClaim extends SkriptEvent {
     static {
         Skript.registerEvent("Faction Land Claim/Unclaim", EvtClaim.class,
                 ConquerLandClaimEvent.class, "[faction] [land] claim", "[faction] [land] (un|de)claim")
-                .description("Called when a faction unclaims/claims land");
+                .description("Called when a faction unclaims/claims land")
+                .examples(
+                        "on faction land claim:",
+                        "broadcast \"Trolololol\"",
+                        "\tclear event-claim"
+                );
     }
 
     private boolean claim;

@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.conditions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
@@ -15,11 +16,15 @@ import org.bukkit.event.Event;
  */
 @Name("Player has Faction")
 @Description("Whether a player has a faction")
+@Examples({
+        "if player has a faction:",
+        "\tbroadcast \"%player% has a faction, better leave them alone.\""
+})
 public class CondPlayerHasFaction extends Condition {
     static {
         Skript.registerCondition(CondPlayerHasFaction.class,
                 "%players% has [(are|is) in] (a) faction",
-                "%players% ((don't|do not) have|(aren't|are not) in) a faction");
+                "%players% ((doesn't|does not) have|(aren't|are not) in) a faction");
     }
 
     private Expression<ConquerPlayer> players;

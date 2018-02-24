@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
@@ -18,6 +19,10 @@ import org.bukkit.event.Event;
  */
 @Name("Claim At Location")
 @Description("The claim (usually represented by a chunk) at a location")
+@Examples({
+        "if the claim at player is wilderness:",
+        "\tsend \"Don't disturb the animals!\""
+})
 public class ExprClaimAtLocation extends SimpleExpression<ConquerClaim>{
     static {
         Skript.registerExpression(ExprClaimAtLocation.class, ConquerClaim.class, ExpressionType.PROPERTY,

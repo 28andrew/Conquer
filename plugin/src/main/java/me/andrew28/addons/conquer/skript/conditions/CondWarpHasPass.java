@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.conditions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
@@ -15,6 +16,10 @@ import org.bukkit.event.Event;
  */
 @Name("Warp of Faction Has Password")
 @Description("Whether a warp of a faction has a password")
+@Examples({
+        "if the warp \"jail\" of player's faction has a password:",
+        "\tsend \"You'll need a password to enter the jail warp.\""
+})
 public class CondWarpHasPass extends Condition{
     static {
         Skript.registerCondition(CondWarpHasPass.class,

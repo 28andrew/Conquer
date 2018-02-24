@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import me.andrew28.addons.conquer.api.ClaimType;
@@ -13,6 +14,10 @@ import org.bukkit.event.Event;
  */
 @Name("Type of Claim")
 @Description("Gets the type of a claim")
+@Examples({
+        "if type of claim at player is wilderness:",
+        "\tsend \"Open up your Pokemon GO app and catch them all (especially Pikachu)!\""
+})
 public class ExprTypeOfClaim extends SimplePropertyExpression<ConquerClaim, ClaimType> {
     static {
         register(ExprTypeOfClaim.class, ClaimType.class, "[the] [claim] type", "conquerclaims");

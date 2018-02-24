@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import me.andrew28.addons.conquer.api.ConquerFaction;
@@ -13,6 +14,10 @@ import org.bukkit.event.Event;
  */
 @Name("Faction of Player")
 @Description("Gets the faction of a player")
+@Examples({
+        "if faction of player is not set:",
+        "\tsend \"What the freak, join a faction you noob.\""
+})
 public class ExprFactionOfPlayer extends SimplePropertyExpression<ConquerPlayer, ConquerFaction> {
     static {
         register(ExprFactionOfPlayer.class, ConquerFaction.class, "[the] [current] faction", "conquerplayers");

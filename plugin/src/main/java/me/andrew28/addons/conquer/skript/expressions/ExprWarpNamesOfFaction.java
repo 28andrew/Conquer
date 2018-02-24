@@ -3,6 +3,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
@@ -19,6 +20,9 @@ import java.util.Set;
  */
 @Name("Warp Names of Faction")
 @Description("The warp names of a faction")
+@Examples({
+        "send \"Valid Warps: %warp names of player's faction%\""
+})
 public class ExprWarpNamesOfFaction extends SimpleExpression<String> {
     static {
         Skript.registerExpression(ExprWarpNamesOfFaction.class, String.class, ExpressionType.PROPERTY,

@@ -19,7 +19,7 @@ import org.bukkit.event.Event;
 @Name("Factions Plugin Name")
 @Description("The currently used faction plugin's name")
 @Examples({
-        "send \"The factions plugin: %%\""
+        "send \"The factions plugin: %factions plugin name%\""
 })
 public class ExprFactionsPluginName extends SimpleExpression<String> {
     static {

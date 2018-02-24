@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import me.andrew28.addons.conquer.api.ConquerPlayer;
@@ -12,6 +13,9 @@ import org.bukkit.event.Event;
  */
 @Name("Faction Title of Player")
 @Description("Gets the faction title of a player")
+@Examples({
+        "reset the player's title"
+})
 public class ExprTitleOfPlayer extends SimplePropertyExpression<ConquerPlayer, String> {
     static {
         register(ExprTitleOfPlayer.class, String.class, "[the] [faction] title", "conquerplayers");

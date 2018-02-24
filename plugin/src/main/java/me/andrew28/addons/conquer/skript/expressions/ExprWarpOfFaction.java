@@ -3,6 +3,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
@@ -18,6 +19,9 @@ import org.bukkit.event.Event;
  */
 @Name("Warp of Faction")
 @Description("The warp with a given name of a faction")
+@Examples({
+        "teleport player to warp \"jail\" of player's faction"
+})
 public class ExprWarpOfFaction extends SimpleExpression<Location> {
     static {
         Skript.registerExpression(ExprWarpOfFaction.class, Location.class, ExpressionType.COMBINED,

@@ -3,6 +3,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 import ch.njol.skript.ScriptLoader;
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
@@ -20,6 +21,10 @@ import org.bukkit.event.Event;
  */
 @Name("Relation Change (Wish) Sender/Target Faction")
 @Description("Gets the sender/target faction of a relation change (wish)")
+@Examples({
+        "on faction relation change:",
+        "\tbroadcast \"%sender faction% changed their relation to %target faction% to %new relation%\""
+})
 public class ExprRelationFactionSenderTarget extends SimpleExpression<ConquerFaction> {
     static {
         Skript.registerExpression(ExprRelationFactionSenderTarget.class, ConquerFaction.class, ExpressionType.SIMPLE,

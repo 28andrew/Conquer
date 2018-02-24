@@ -3,6 +3,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
@@ -22,6 +23,9 @@ import java.util.List;
  */
 @Name("Claims of Faction")
 @Description("The claims of a faction")
+@Examples({
+        "send \"Amount of claims: %size of claims of player's faction%\""
+})
 public class ExprClaimsOfFaction extends SimpleExpression<ConquerClaim> {
     static {
         Skript.registerExpression(ExprClaimsOfFaction.class, ConquerClaim.class, ExpressionType.PROPERTY,

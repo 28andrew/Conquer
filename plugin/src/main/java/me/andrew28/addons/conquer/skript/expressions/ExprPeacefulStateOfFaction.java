@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import me.andrew28.addons.conquer.api.ConquerFaction;
@@ -12,6 +13,10 @@ import org.bukkit.event.Event;
  */
 @Name("Peaceful State of Faction")
 @Description("Gets whether a faction is peaceful or not")
+@Examples({
+        "if peaceful state of player's faction is true:",
+        "\tsend \"Your faction is pretty tranquil, if I have to say..\""
+})
 public class ExprPeacefulStateOfFaction extends SimplePropertyExpression<ConquerFaction, Boolean> {
     static {
         register(ExprPeacefulStateOfFaction.class, Boolean.class,

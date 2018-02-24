@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import ch.njol.skript.util.Date;
@@ -14,6 +15,9 @@ import org.bukkit.event.Event;
  */
 @Name("Home of Faction")
 @Description("The home location of a faction")
+@Examples({
+        "teleport the player to home of player's faction"
+})
 public class ExprHomeOfFaction extends SimplePropertyExpression<ConquerFaction, Location> {
     static {
         register(ExprHomeOfFaction.class, Location.class, "[the] home [location]", "conquerfactions");

@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import me.andrew28.addons.conquer.api.ConquerFaction;
@@ -12,6 +13,9 @@ import org.bukkit.event.Event;
  */
 @Name("Id of Faction")
 @Description("The id of a faction")
+@Examples({
+        "send \"Your faction's id: %id of player's faction%\""
+})
 public class ExprIdOfFaction extends SimplePropertyExpression<ConquerFaction, String> {
     static {
         register(ExprIdOfFaction.class, String.class, "[the] [unique] id[entifier]", "conquerfactions");

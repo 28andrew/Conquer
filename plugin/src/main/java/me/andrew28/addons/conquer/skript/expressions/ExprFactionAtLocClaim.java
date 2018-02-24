@@ -3,6 +3,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
@@ -25,6 +26,10 @@ import java.util.Set;
  */
 @Name("Faction at Location/Claim")
 @Description("Faction at location/claim")
+@Examples({
+        "if faction at player is set:",
+        "\t send \"This isn't the wilderness, you should feel a little safer if this is your faction's land.\""
+})
 public class ExprFactionAtLocClaim extends SimpleExpression<ConquerFaction> {
     static {
         Skript.registerExpression(ExprFactionAtLocClaim.class, ConquerFaction.class, ExpressionType.PROPERTY,

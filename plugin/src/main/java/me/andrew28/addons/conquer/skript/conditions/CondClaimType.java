@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.conditions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
@@ -16,6 +17,10 @@ import org.bukkit.event.Event;
  */
 @Name("Claim is Wilderness/Safe Zone/War Zone")
 @Description("Whether a claim is wilderness, safe zone, or war zone")
+@Examples({
+        "if claim at player is war zone:",
+        "send \"Be careful! You're in a war zone.\""
+})
 public class CondClaimType extends Condition {
     static {
         Skript.registerCondition(CondClaimType.class, "[the] [claim][s] %conquerclaims% (is|are) [of type] [a] %claimtype%",

@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.expressions.base.SimplePropertyExpression;
 import me.andrew28.addons.conquer.api.ConquerFaction;
@@ -13,6 +14,9 @@ import org.bukkit.event.Event;
  */
 @Name("Leader of Faction")
 @Description("The leader of a faction")
+@Examples({
+        "set the leader of player's faction to player"
+})
 public class ExprLeaderOfFaction extends SimplePropertyExpression<ConquerFaction, ConquerPlayer> {
     static {
         register(ExprLeaderOfFaction.class, ConquerPlayer.class,

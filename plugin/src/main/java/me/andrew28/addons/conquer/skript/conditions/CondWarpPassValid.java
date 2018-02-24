@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.conditions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
@@ -15,6 +16,11 @@ import org.bukkit.event.Event;
  */
 @Name("Faction Warp Password Is Valid")
 @Description("Whether a password is valid for a warp of a faction")
+@Examples({
+        "if the password \"correcthorsebatterystaple\" is correct for the warp \"jail\" of player's faction:",
+        "\tsend \"'corresthorsebatterystaple' is the password for the warp 'jail'! Someone gets this XKCD reference, " +
+                "right? ;\\\""
+})
 public class CondWarpPassValid extends Condition {
     static {
         Skript.registerCondition(CondWarpPassValid.class, "[the] [password] %string% (is|1¦is(n't| not))" +

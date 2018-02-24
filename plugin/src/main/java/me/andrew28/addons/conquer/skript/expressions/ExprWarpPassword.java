@@ -3,6 +3,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
@@ -17,6 +18,9 @@ import org.bukkit.event.Event;
  */
 @Name("Warp Password")
 @Description("The warp password of a warp of a faction. Some faction plugins can not give this, but can set it.")
+@Examples({
+        "set the warp password of the warp \"jail\" for player's faction to \"correcthorsebatterystaple\""
+})
 public class ExprWarpPassword extends SimpleExpression<String> {
     static {
         Skript.registerExpression(ExprWarpPassword.class, String.class, ExpressionType.COMBINED,

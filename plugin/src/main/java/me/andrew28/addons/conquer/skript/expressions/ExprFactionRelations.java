@@ -3,6 +3,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 import ch.njol.skript.Skript;
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
@@ -21,6 +22,11 @@ import java.util.List;
  */
 @Name("Relation of Factions")
 @Description("The relation between two factions")
+@Examples({
+        "on death of player:",
+        "\tif relationship between victim's faction to attacker's faction is enemy:",
+        "\t\tbroadcast \"Oof, %attacker's faction% just killed a player on %victim's faction%\""
+})
 public class ExprFactionRelations extends SimpleExpression<Relation> {
     static {
         Skript.registerExpression(ExprFactionRelations.class, Relation.class, ExpressionType.COMBINED,

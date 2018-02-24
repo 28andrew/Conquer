@@ -2,6 +2,7 @@ package me.andrew28.addons.conquer.skript.expressions;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
+import ch.njol.skript.doc.Examples;
 import ch.njol.skript.doc.Name;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.ExpressionType;
@@ -21,6 +22,10 @@ import java.util.List;
  */
 @Name("Faction with Name")
 @Description("Gets the faction with a specified name")
+@Examples({
+        "if faction with name \"Umbaska\" is set:",
+        "\tsend \"Ducky is in us all.\""
+})
 public class ExprFactionWithName extends SimpleExpression<ConquerFaction> {
     static {
         Skript.registerExpression(ExprFactionWithName.class, ConquerFaction.class, ExpressionType.COMBINED,
