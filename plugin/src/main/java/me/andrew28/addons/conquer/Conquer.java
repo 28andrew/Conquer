@@ -4,6 +4,7 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.SkriptAddon;
 import me.andrew28.addons.conquer.api.EventForwarder;
 import me.andrew28.addons.conquer.api.FactionsPlugin;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,7 +26,12 @@ public class Conquer extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
+        Metrics metrics = new Metrics(this);
+
+        // Try using the default implementations
         loadFactions();
+
         // Error if no third-party implementations registered themselves either
         getServer().getScheduler().runTask(this, () -> {
             if (factions == null) {

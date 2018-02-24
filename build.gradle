@@ -1,10 +1,21 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.2'
+    }
+}
+
+
 allprojects {
+    apply plugin: 'com.github.johnrengelman.shadow'
     apply plugin: 'java'
 
     group 'me.andrew28.addons'
-    version '1.0.0'
+    version '1.0.1'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -34,6 +45,10 @@ subprojects {
         maven {
             url 'https://ci.ender.zone/plugin/repository/everything/'
         }
+        // bStats Repository
+        maven {
+            url 'http://repo.bstats.org/content/repositories/releases/'
+        }
     }
 
     dependencies {
@@ -52,7 +67,7 @@ subprojects {
 
 // Combine all modules into one jar
 subprojects.each { subproject -> evaluationDependsOn(subproject.path)}
-task allJar(type: Jar, dependsOn: subprojects.assemble) {
+task allJar(type: Jar, dependsOn: subprojects.shadowJar) {
     baseName = 'Conquer'
     subprojects.each { subproject ->
         from subproject.configurations.archives.allArtifacts.files.collect {
