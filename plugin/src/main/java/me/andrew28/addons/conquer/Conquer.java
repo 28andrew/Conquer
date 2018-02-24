@@ -1,94 +1,104 @@
 package me.andrew28.addons.conquer;
 
-import me.andrew28.addons.conquer.api.FactionsPluginManager;
+import ch.njol.skript.Skript;
+import ch.njol.skript.SkriptAddon;
+import me.andrew28.addons.conquer.api.EventForwarder;
 import me.andrew28.addons.conquer.api.FactionsPlugin;
-import me.andrew28.addons.conquer.factions.FactionsPluginType;
-import me.andrew28.addons.core.Addon;
-import org.bukkit.Bukkit;
+import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Arrays;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
 
 /**
  * @author Andrew Tran
  */
-public class Conquer extends Addon{
+public class Conquer extends JavaPlugin {
     private static Conquer instance;
+    private SkriptAddon addonInstance;
+    private FactionsPlugin factions;
+    private EventForwarder currentForwarder;
+    private boolean registeredElements = false;
 
-    private FactionsPlugin factionsPlugin = null;
-    private FactionsPluginType factionsPluginType = null;
+    @Override
+    public void onEnable() {
+        instance = this;
+        loadFactions();
+        // Error if no third-party implementations registered themselves either
+        getServer().getScheduler().runTask(this, () -> {
+            if (factions == null) {
+                getLogger().log(Level.SEVERE, "No other faction plugins have been registered," +
+                        " make sure you have a compatible one installed and restart your server.");
+            }
+        });
+    }
+
+    private void loadFactions() {
+        List<String> names = new ArrayList<>();
+        for (DefaultFactionPlugins plugin : DefaultFactionPlugins.values()) {
+            FactionsPlugin factions;
+            try {
+                factions = plugin.getImplClass().newInstance();
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+                continue;
+            }
+            String name = factions.getName();
+            if (factions.canUse()) {
+                setFactions(factions);
+                return;
+            }
+            names.add(name);
+        }
+        getLogger().warning("None of the default faction plugins were found: " + String.join(", ", names));
+        getLogger().warning("Waiting for other faction plugins to register..");
+    }
+
+    private void registerElements() {
+        if (registeredElements) {
+            throw new IllegalStateException("Elements have already been registered.");
+        }
+        try {
+            getAddonInstance().loadClasses("me.andrew28.addons.conquer", "skript");
+            registeredElements = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public FactionsPlugin getFactions() {
+        return factions;
+    }
+
+    public void setFactions(FactionsPlugin factions) {
+        factions.init();
+
+        if (currentForwarder != null) {
+            HandlerList.unregisterAll(currentForwarder);
+        }
+        currentForwarder = factions.getEventForwarder();
+        if (currentForwarder != null) {
+            getServer().getPluginManager().registerEvents(currentForwarder, this);
+        }
+
+        this.factions = factions;
+        getLogger().warning("Using factions plugin: " + factions.getName());
+
+        if (!registeredElements) {
+            registerElements();
+        }
+    }
+
     public static Conquer getInstance() {
         return instance;
     }
 
-    @Override
-    public void onAddonEnable() {
-        instance = this;
-        register("me.andrew28.addons.conquer.skript");
-        getServer().getPluginCommand("conquer").setExecutor(getCommand(new AddonCommand[]{}));
-        if (!initializeImpl()){
-            getServer().getPluginManager().disablePlugin(this);
+    public SkriptAddon getAddonInstance() {
+        if (addonInstance == null) {
+            addonInstance = Skript.registerAddon(this);
         }
+        return addonInstance;
     }
-
-    public boolean initializeImpl(){
-        getLogger().info("Looking for Factions (or related) Plugin to hook into");
-        getLogger().info("Possible Implementations: " + String.join(", ", Arrays.stream(FactionsPluginType.values()).map(FactionsPluginType::getFriendlyName).toArray(String[]::new)));
-        for (FactionsPluginType factionsPluginType : FactionsPluginType.values()){
-            FactionsPlugin factionPluginObject = null;
-            if (factionsPluginType.getPluginImplementation() != null){
-                try {
-                    factionPluginObject = factionsPluginType.getPluginImplementation().newInstance();
-                } catch (InstantiationException | IllegalAccessException e) {
-                    getLogger().warning("Failed to instantiate the class " + factionsPluginType.getPluginImplementation().getCanonicalName());
-                    e.printStackTrace();
-                }
-            }
-            if (factionPluginObject != null && factionPluginObject.canBeUsed()){
-                factionsPlugin = factionPluginObject;
-                getLogger().info("Implementation " + factionsPluginType.getFriendlyName() + " is being used!");
-                factionsPlugin.initialize();
-                factionsPlugin.initializeSkriptComponents(this);
-                Bukkit.getPluginManager().registerEvents(factionsPlugin.getEventWrapperListener(), this);
-                this.factionsPluginType = factionsPluginType;
-                FactionsPluginManager.getInstance().setFactionsPlugin(factionsPlugin);
-                return true;
-            }
-        }
-        getLogger().warning("Could not find a Factions (or related) plugins to HOOK INTO, **if you have one reply to the Addon Thread requesting for me to add support for it.**");
-        return false;
-    }
-
-    public boolean classExists(String clazz){
-        try{
-            Class.forName(clazz);
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-    }
-
-    public FactionsPlugin getFactionsPlugin() {
-        return factionsPlugin;
-    }
-
-    public FactionsPluginType getFactionsPluginType() {
-        return factionsPluginType;
-    }
-    
-    /**
-     * Set the faction plugin class to use.
-     * @param factionsPlugin The faction plugin class to use.
-     */
-    public void setFactionsPlugin(FactionsPlugin factionsPlugin) {
-        this.factionsPlugin = factionsPlugin;
-    }
-    
-    /**
-     * Set the faction plugin type.
-     * @param factionsPluginType The faction plugin type.
-     */
-    public void setFactionsPluginType(FactionsPluginType factionsPluginType) {
-        this.factionsPluginType = factionsPluginType;
-    }
-    
 }

@@ -2,12 +2,21 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Conquer.iml" filepath="$PROJECT_DIR$/Conquer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/factionsuuid/factionsuuid.iml" filepath="$PROJECT_DIR$/factionsuuid/factionsuuid.iml" />
-      <module fileurl="file://$PROJECT_DIR$/implementations/implementations.iml" filepath="$PROJECT_DIR$/implementations/implementations.iml" />
-      <module fileurl="file://$PROJECT_DIR$/massivecorefactions/massivecorefactions.iml" filepath="$PROJECT_DIR$/massivecorefactions/massivecorefactions.iml" />
-      <module fileurl="file://$PROJECT_DIR$/plugin/plugin.iml" filepath="$PROJECT_DIR$/plugin/plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Conquer.iml" filepath="$PROJECT_DIR$/.idea/modules/Conquer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Conquer_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Conquer_main.iml" group="Conquer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Conquer_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Conquer_test.iml" group="Conquer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/api.iml" filepath="$PROJECT_DIR$/.idea/modules/api/api.iml" group="api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/api/api_main.iml" group="api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/api/api_test.iml" group="api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/factionsuuid-impl/factionsuuid-impl.iml" filepath="$PROJECT_DIR$/.idea/modules/factionsuuid-impl/factionsuuid-impl.iml" group="factionsuuid-impl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/factionsuuid-impl/factionsuuid-impl_main.iml" filepath="$PROJECT_DIR$/.idea/modules/factionsuuid-impl/factionsuuid-impl_main.iml" group="factionsuuid-impl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/factionsuuid-impl/factionsuuid-impl_test.iml" filepath="$PROJECT_DIR$/.idea/modules/factionsuuid-impl/factionsuuid-impl_test.iml" group="factionsuuid-impl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfactions-impl/mfactions-impl.iml" filepath="$PROJECT_DIR$/.idea/modules/mfactions-impl/mfactions-impl.iml" group="mfactions-impl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfactions-impl/mfactions-impl_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mfactions-impl/mfactions-impl_main.iml" group="mfactions-impl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mfactions-impl/mfactions-impl_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mfactions-impl/mfactions-impl_test.iml" group="mfactions-impl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/plugin.iml" group="plugin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/plugin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/plugin_main.iml" group="plugin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/plugin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/plugin_test.iml" group="plugin" />
     </modules>
   </component>
 </project>

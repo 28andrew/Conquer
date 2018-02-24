@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':api')
+    compile name: 'MassiveCore'
+    compile name: 'MassiveFactions'
+}

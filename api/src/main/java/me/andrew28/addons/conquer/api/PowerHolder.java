@@ -5,6 +5,8 @@ package me.andrew28.addons.conquer.api;
  */
 public interface PowerHolder {
     double getPower();
+    void setPower(double power);
     double getMaximumPower();
     double getPowerBoost();
+    void setPowerBoost(double powerBoost);
 }

@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <annotationProcessing>
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="api" />
-        <module name="factionsuuid" />
-        <module name="implementations" />
-        <module name="massivecorefactions" />
-        <module name="plugin" />
-      </profile>
-    </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="api" target="1.8" />
-      <module name="Conquer" target="1.5" />
-      <module name="factionsuuid" target="1.8" />
-      <module name="implementations" target="1.8" />
-      <module name="massivecorefactions" target="1.8" />
-      <module name="plugin" target="1.8" />
+      <module name="api_main" target="1.8" />
+      <module name="api_test" target="1.8" />
+      <module name="Conquer_main" target="1.8" />
+      <module name="Conquer_test" target="1.8" />
+      <module name="factions-impl_main" target="1.8" />
+      <module name="factions-impl_test" target="1.8" />
+      <module name="factions-uuid-impl_main" target="1.8" />
+      <module name="factions-uuid-impl_test" target="1.8" />
+      <module name="factionsuuid-impl_main" target="1.8" />
+      <module name="factionsuuid-impl_test" target="1.8" />
+      <module name="mfactions-impl_main" target="1.8" />
+      <module name="mfactions-impl_test" target="1.8" />
+      <module name="plugin_main" target="1.8" />
+      <module name="plugin_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
