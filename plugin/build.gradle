@@ -1,0 +1,4 @@
+dependencies {
+    compile project(':factionsuuid-impl')
+    compile project(':mfactions-impl')
+}

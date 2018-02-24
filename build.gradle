@@ -1,0 +1,70 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+allprojects {
+    apply plugin: 'java'
+
+    group 'me.andrew28.addons'
+    version '1.0.0'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+subprojects {
+    repositories {
+        //All sub-projects will now refer to the same 'libs' directory
+        flatDir {
+            dirs "$rootProject.projectDir/libs"
+        }
+        mavenLocal()
+        mavenCentral()
+        // bensku Repository
+        maven {
+            url "https://raw.githubusercontent.com/bensku/mvn-repo/master"
+        }
+        // Spigot Repository
+        maven {
+            url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+        }
+        // Sonatype Repository
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+        }
+        // drtshock Repository
+        maven {
+            url 'https://ci.ender.zone/plugin/repository/everything/'
+        }
+    }
+
+    dependencies {
+        compileOnly group: 'org.spigotmc', name: 'spigot-api', version: '1.12.2-R0.1-SNAPSHOT'
+        compileOnly (group: 'ch.njol', name: 'skript', version: '2.2-dev32') {
+            transitive = false
+        }
+    }
+
+    processResources {
+        filter ReplaceTokens, tokens: [
+                "version": project.property("version")
+        ]
+    }
+}
+
+// Combine all modules into one jar
+subprojects.each { subproject -> evaluationDependsOn(subproject.path)}
+task allJar(type: Jar, dependsOn: subprojects.assemble) {
+    baseName = 'Conquer'
+    subprojects.each { subproject ->
+        from subproject.configurations.archives.allArtifacts.files.collect {
+            zipTree(it)
+        }
+    }
+}
+
+// Make 'gradle build' run our allJar task
+jar.enabled = false
+build.dependsOn(allJar)
+
+artifacts {
+    allJar
+}

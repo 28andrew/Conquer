@@ -1,0 +1,8 @@
+name: Conquer
+description: "Adds support for multiple faction plugins to Skript"
+author: xXAndrew28Xx
+version: 1.0.0
+
+main: me.andrew28.addons.conquer.Conquer
+
+softdepend: [Skript,Factions]

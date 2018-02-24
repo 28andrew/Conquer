@@ -1,12 +1,8 @@
 name: Conquer
-main: me.andrew28.addons.conquer.Conquer
-version: ${pom.version}
-
+description: "Adds support for multiple faction plugins to Skript"
 author: xXAndrew28Xx
+version: @version@
 
-softdepend: [Skript]
-depend: [Factions]
+main: me.andrew28.addons.conquer.Conquer
 
-commands:
-    conquer:
-        description: "The main command for the Skript addon Conquer"
+softdepend: [Skript,Factions]

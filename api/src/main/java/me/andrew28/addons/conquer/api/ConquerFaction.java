@@ -1,128 +1,70 @@
 package me.andrew28.addons.conquer.api;
 
-import ch.njol.yggdrasil.Fields;
-import me.andrew28.addons.conquer.api.events.ConquerFactionRelationChangeEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.bukkit.plugin.Plugin;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.Set;
 
 /**
  * @author Andrew Tran
  */
-public abstract class ConquerFaction implements PowerHolder{
+public abstract class ConquerFaction implements PowerHolder, FieldSerializable<ConquerFaction> {
+    public abstract String getId();
+    public abstract void setId(String id);
+
     public abstract String getName();
     public abstract void setName(String name);
-    public abstract Fields serialize();
-    public abstract FactionCommandSender getFactionCommandSender();
+
     public abstract String getDescription();
     public abstract void setDescription(String description);
+
     public abstract String getMotd();
     public abstract void setMotd(String motd);
-    public abstract String getIdentifier();
-    public abstract void setIdentifier(String identifier);
+
     public abstract Date getCreationDate();
     public abstract void setCreationDate(Date date);
-    public abstract void setPowerBoost(Double powerBoost);
-    public abstract OfflinePlayer getLeader();
-    public abstract void setLeader(OfflinePlayer leader);
+
+    public abstract double getPowerBoost();
+    public abstract void setPowerBoost(double powerBoost);
+
+    public abstract ConquerPlayer getLeader();
+    public abstract void setLeader(ConquerPlayer leader);
+
     public abstract Location getHome();
-    public abstract void setHome(Location location);
-    public abstract OfflinePlayer[] getPlayers();
-    public abstract void addPlayer(OfflinePlayer offlinePlayer);
-    public abstract void removePlayer(OfflinePlayer offlinePlayer);
+    public abstract void setHome(Location home);
 
-    public abstract ConquerFactionRelationChangeEvent.Relation getRelationShipTo(ConquerFaction otherFaction);
+    public abstract ConquerPlayer[] getMembers();
+    public abstract void addMember(ConquerPlayer member);
+    public abstract void removeMember(ConquerPlayer member);
 
-    public static abstract class FactionCommandSender implements CommandSender {
-        @Override
-        public void sendMessage(String[] strings) {
-            for (String message : strings){
-                sendMessage(message);
-            }
-        }
+    public abstract CommandSender getSender();
 
-        @Override
-        public Server getServer() {
-            return Bukkit.getServer();
-        }
+    public abstract Map<String, Location> getWarps();
+    public abstract boolean hasWarpPassword(String warp);
+    public abstract boolean isWarpPassword(String warp, String password);
+    public abstract String getWarpPassword(String warp);
+    public abstract void setWarpPassword(String warp, String password);
 
-        @Override
-        public String getName() {
-            return "FactionsCommandSender";
-        }
+    public abstract Set<ConquerPlayer> getInvited();
+    public abstract void invite(ConquerPlayer player);
+    public abstract void deinvite(ConquerPlayer player);
 
-        @Override
-        public boolean isPermissionSet(String s) {
-            return false;
-        }
+    public abstract boolean isPeaceful();
+    public abstract void setPeaceful(boolean peaceful);
 
-        @Override
-        public boolean isPermissionSet(Permission permission) {
-            return false;
-        }
+    public abstract boolean isOpen();
+    public abstract void setOpen(boolean open);
 
-        @Override
-        public boolean hasPermission(String s) {
-            return false;
-        }
+    public abstract Relation getRelationTo(ConquerFaction faction);
+    public abstract void setRelationBetween(ConquerFaction faction, Relation relation);
 
-        @Override
-        public boolean hasPermission(Permission permission) {
-            return false;
-        }
+    public abstract ConquerClaim<?>[] getClaims();
+    public abstract void claim(ConquerClaim<?> claim);
+    public abstract void claim(Location location);
+    public abstract void unclaim(ConquerClaim<?> claim);
+    public abstract void unclaim(Location location);
 
-        @Override
-        public PermissionAttachment addAttachment(Plugin plugin, String s, boolean b) {
-            return null;
-        }
-
-        @Override
-        public PermissionAttachment addAttachment(Plugin plugin) {
-            return null;
-        }
-
-        @Override
-        public PermissionAttachment addAttachment(Plugin plugin, String s, boolean b, int i) {
-            return null;
-        }
-
-        @Override
-        public PermissionAttachment addAttachment(Plugin plugin, int i) {
-            return null;
-        }
-
-        @Override
-        public void removeAttachment(PermissionAttachment permissionAttachment) {
-
-        }
-
-        @Override
-        public void recalculatePermissions() {
-
-        }
-
-        @Override
-        public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-            return null;
-        }
-
-        @Override
-        public boolean isOp() {
-            return false;
-        }
-
-        @Override
-        public void setOp(boolean b) {
-
-        }
-    }
+    public abstract void disband();
 }

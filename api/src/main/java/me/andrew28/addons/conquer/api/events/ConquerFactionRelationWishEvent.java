@@ -1,6 +1,8 @@
 package me.andrew28.addons.conquer.api.events;
 
 import me.andrew28.addons.conquer.api.ConquerFaction;
+import me.andrew28.addons.conquer.api.ConquerPlayer;
+import me.andrew28.addons.conquer.api.Relation;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -9,21 +11,23 @@ import org.bukkit.event.HandlerList;
  * @author Andrew Tran
  */
 public class ConquerFactionRelationWishEvent extends Event implements Cancellable {
-    private static final HandlerList handlers = new HandlerList();
-
+    private static HandlerList handlerList = new HandlerList();
+    private boolean cancelled;
+    private ConquerPlayer caller;
     private ConquerFaction sender, target;
-    private ConquerFactionRelationChangeEvent.Relation oldRelation, newRelation;
-    private Boolean cancelled = false;
+    private Relation oldRelation, newRelation;
 
-    public ConquerFactionRelationWishEvent(ConquerFaction sender, ConquerFaction target, ConquerFactionRelationChangeEvent.Relation oldRelation, ConquerFactionRelationChangeEvent.Relation newRelation) {
+    public ConquerFactionRelationWishEvent(ConquerPlayer caller, ConquerFaction sender, ConquerFaction target,
+                                           Relation oldRelation, Relation newRelation) {
+        this.caller = caller;
         this.sender = sender;
         this.target = target;
         this.oldRelation = oldRelation;
         this.newRelation = newRelation;
     }
 
-    public static HandlerList getHandlerList() {
-        return handlers;
+    public ConquerPlayer getCaller() {
+        return caller;
     }
 
     public ConquerFaction getSender() {
@@ -34,17 +38,12 @@ public class ConquerFactionRelationWishEvent extends Event implements Cancellabl
         return target;
     }
 
-    public ConquerFactionRelationChangeEvent.Relation getOldRelation() {
+    public Relation getOldRelation() {
         return oldRelation;
     }
 
-    public ConquerFactionRelationChangeEvent.Relation getNewRelation() {
+    public Relation getNewRelation() {
         return newRelation;
-    }
-
-    @Override
-    public HandlerList getHandlers() {
-        return handlers;
     }
 
     @Override
@@ -53,7 +52,16 @@ public class ConquerFactionRelationWishEvent extends Event implements Cancellabl
     }
 
     @Override
-    public void setCancelled(boolean b) {
-        cancelled = b;
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
+
+    @Override
+    public HandlerList getHandlers() {
+        return handlerList;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlerList;
     }
 }

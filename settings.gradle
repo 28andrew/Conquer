@@ -1,0 +1,5 @@
+rootProject.name = 'Conquer'
+include 'plugin'
+include 'api'
+include 'factionsuuid-impl'
+include 'mfactions-impl'
