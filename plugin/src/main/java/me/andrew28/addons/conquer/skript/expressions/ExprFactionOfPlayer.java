@@ -20,7 +20,7 @@ import org.bukkit.event.Event;
 })
 public class ExprFactionOfPlayer extends SimplePropertyExpression<ConquerPlayer, ConquerFaction> {
     static {
-        register(ExprFactionOfPlayer.class, ConquerFaction.class, "[the] [current] faction", "conquerplayers");
+        register(ExprFactionOfPlayer.class, ConquerFaction.class, "[current] faction", "conquerplayers");
     }
 
     @Override

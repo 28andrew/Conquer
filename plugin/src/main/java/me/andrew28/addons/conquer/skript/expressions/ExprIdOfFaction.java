@@ -18,7 +18,7 @@ import org.bukkit.event.Event;
 })
 public class ExprIdOfFaction extends SimplePropertyExpression<ConquerFaction, String> {
     static {
-        register(ExprIdOfFaction.class, String.class, "[the] [unique] id[entifier]", "conquerfactions");
+        register(ExprIdOfFaction.class, String.class, "[unique] id[entifier]", "conquerfactions");
     }
 
     @Override

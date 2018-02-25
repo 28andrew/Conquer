@@ -19,7 +19,7 @@ import org.bukkit.event.Event;
 )
 public class ExprCreationDateOfFaction extends SimplePropertyExpression<ConquerFaction, Date> {
     static {
-        register(ExprCreationDateOfFaction.class, Date.class, "[the] creation date", "conquerfactions");
+        register(ExprCreationDateOfFaction.class, Date.class, "creation date", "conquerfactions");
     }
 
     @Override

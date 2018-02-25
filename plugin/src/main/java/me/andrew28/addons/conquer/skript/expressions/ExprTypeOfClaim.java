@@ -20,7 +20,7 @@ import org.bukkit.event.Event;
 })
 public class ExprTypeOfClaim extends SimplePropertyExpression<ConquerClaim, ClaimType> {
     static {
-        register(ExprTypeOfClaim.class, ClaimType.class, "[the] [claim] type", "conquerclaims");
+        register(ExprTypeOfClaim.class, ClaimType.class, "[claim] type", "conquerclaims");
     }
 
     @Override

@@ -18,7 +18,7 @@ import org.bukkit.event.Event;
 })
 public class ExprNameOfFaction extends SimplePropertyExpression<ConquerFaction, String> {
     static {
-        register(ExprNameOfFaction.class, String.class, "[the] [display] (name|tag)", "conquerfactions");
+        register(ExprNameOfFaction.class, String.class, "[display] (name|tag)", "conquerfactions");
     }
 
     @Override

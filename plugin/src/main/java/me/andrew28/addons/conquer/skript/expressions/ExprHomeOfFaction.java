@@ -20,7 +20,7 @@ import org.bukkit.event.Event;
 })
 public class ExprHomeOfFaction extends SimplePropertyExpression<ConquerFaction, Location> {
     static {
-        register(ExprHomeOfFaction.class, Location.class, "[the] home [location]", "conquerfactions");
+        register(ExprHomeOfFaction.class, Location.class, "home [location]", "conquerfactions");
     }
 
     @Override
