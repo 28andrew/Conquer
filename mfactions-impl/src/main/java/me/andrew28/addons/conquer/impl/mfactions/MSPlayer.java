@@ -7,13 +7,14 @@ import me.andrew28.addons.conquer.api.ConquerPlayer;
 import org.bukkit.OfflinePlayer;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
  * @author Andrew Tran
  */
 public class MSPlayer extends ConquerPlayer {
-    private static WeakHashMap<Object, MSPlayer> cache = new WeakHashMap<>();
+    private static Map<Object, MSPlayer> cache = new WeakHashMap<>();
     private MSPlugin plugin;
     private FactionColl factionColl;
     private MPlayer mPlayer;

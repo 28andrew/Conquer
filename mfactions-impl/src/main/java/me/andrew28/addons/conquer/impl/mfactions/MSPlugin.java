@@ -34,11 +34,11 @@ public class MSPlugin extends FactionsPlugin {
 
     @Override
     public boolean canUse() {
-        Plugin factionsPlugin = getPlugin("Factions");
-        return factionsPlugin != null &&
-                factionsPlugin.getDescription() != null &&
-                factionsPlugin.getDescription().getWebsite() != null &&
-                factionsPlugin.getDescription().getWebsite().contains("massivecraft");
+        Plugin plugin = getPlugin("Factions");
+        return plugin != null &&
+                plugin.getDescription() != null &&
+                plugin.getDescription().getWebsite() != null &&
+                plugin.getDescription().getWebsite().contains("massivecraft");
     }
 
     @Override

@@ -1,11 +1,11 @@
-package me.andrew28.addons.conquer.impl.factionsuuid;
+package me.andrew28.addons.conquer.impl.factionsone;
 
 import ch.njol.yggdrasil.Fields;
 import com.massivecraft.factions.Board;
 import com.massivecraft.factions.FLocation;
 import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.Factions;
-import com.massivecraft.factions.struct.Role;
+import com.massivecraft.factions.struct.Rel;
 import me.andrew28.addons.conquer.api.ConquerClaim;
 import me.andrew28.addons.conquer.api.ConquerFaction;
 import me.andrew28.addons.conquer.api.ConquerPlayer;
@@ -13,6 +13,7 @@ import me.andrew28.addons.conquer.api.EventForwarder;
 import me.andrew28.addons.conquer.api.FactionResolver;
 import me.andrew28.addons.conquer.api.FactionsPlugin;
 import me.andrew28.addons.conquer.api.Relation;
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -23,13 +24,16 @@ import java.io.StreamCorruptedException;
 /**
  * @author Andrew Tran
  */
-public class FUPlugin extends FactionsPlugin {
+public class FOPlugin extends FactionsPlugin {
+    public static String WILDERNESS_ID = "0";
+    public static String SAFE_ZONE_ID = "-1";
+    public static String WAR_ZONE_ID = "-2";
+
     private Factions factions;
     private FPlayers fPlayers;
-    private Board board;
 
-    public FUPlugin() {
-        super("Factions UUID");
+    public FOPlugin() {
+        super("Factions One");
     }
 
     @Override
@@ -38,45 +42,39 @@ public class FUPlugin extends FactionsPlugin {
         return plugin != null &&
                 plugin.getDescription() != null &&
                 plugin.getDescription().getAuthors() != null &&
-                plugin.getDescription().getAuthors().contains("drtshock");
+                !plugin.getDescription().getAuthors().contains("drtshock") &&
+                plugin.getDescription().getAuthors().contains("externo6");
     }
 
     @Override
     public void init() {
-        factions = Factions.getInstance();
-        fPlayers = FPlayers.getInstance();
-        board = Board.getInstance();
+        factions = Factions.i;
+        fPlayers = FPlayers.i;
     }
 
     @Override
     public EventForwarder getEventForwarder() {
-        if (eventForwarder == null) {
-            eventForwarder = new FUEventForwarder(this);
-        }
-        return eventForwarder;
+        return new FOEventForwarder(this);
     }
 
     @Override
     public FactionResolver getFactionResolver() {
-        if (factionResolver == null) {
-            factionResolver = new FUFactionResolver(this);
-        }
-        return factionResolver;
+        return new FOFactionResolver(this);
     }
 
     @Override
     public ConquerPlayer getConquerPlayer(OfflinePlayer player) {
-        return FUPlayer.get(this, player);
+        return FOPlayer.get(this, player);
     }
 
     @Override
-    public ConquerClaim<Chunk> getClaim(Location location) {
-        return FUClaim.get(this, location.getChunk());
+    public ConquerClaim<?> getClaim(Location location) {
+        return FOClaim.get(this, translate(location));
     }
 
     @Override
     public void removeClaim(Location location) {
-        board.removeAt(translate(location));
+        Board.removeAt(translate(location));
     }
 
     @Override
@@ -90,7 +88,7 @@ public class FUPlugin extends FactionsPlugin {
         if (chunk == null) {
             throw new StreamCorruptedException();
         }
-        return FUClaim.get(this, chunk);
+        return FOClaim.get(this, chunk);
     }
 
     @Override
@@ -99,7 +97,7 @@ public class FUPlugin extends FactionsPlugin {
         if (id == null) {
             throw new StreamCorruptedException();
         }
-        return FUFaction.get(this, factions.getFactionById(id));
+        return FOFaction.get(this, factions.get(id));
     }
 
     public Factions getFactions() {
@@ -110,94 +108,94 @@ public class FUPlugin extends FactionsPlugin {
         return fPlayers;
     }
 
-    public Board getBoard() {
-        return board;
-    }
-
-    public Relation translate(com.massivecraft.factions.struct.Relation fRelation) {
-        if (fRelation == null) {
+    public Relation translateRelation(Rel rel) {
+        if (rel == null) {
             return null;
         }
-        switch (fRelation) {
-            case MEMBER:
-                return Relation.MEMBER;
-            case ALLY:
-                return Relation.ALLY;
-            case TRUCE:
-                return Relation.TRUCE;
-            case NEUTRAL:
-                return Relation.NEUTRAL;
+        switch (rel) {
             case ENEMY:
                 return Relation.ENEMY;
+            case NEUTRAL:
+                return Relation.NEUTRAL;
+            case TRUCE:
+                return Relation.TRUCE;
+            case ALLY:
+                return Relation.ALLY;
+            case MEMBER:
+                return Relation.MEMBER;
         }
         return Relation.OTHER;
     }
 
-    public com.massivecraft.factions.struct.Relation translate(Relation relation) {
+    public Rel translateRelation(Relation relation) {
         if (relation == null) {
             return null;
         }
-        com.massivecraft.factions.struct.Relation fRelation = null;
+        Rel rel = null;
         switch (relation) {
             case MEMBER:
-                fRelation = com.massivecraft.factions.struct.Relation.MEMBER;
+                rel = Rel.MEMBER;
                 break;
             case ALLY:
-                fRelation = com.massivecraft.factions.struct.Relation.ALLY;
+                rel = Rel.ALLY;
                 break;
             case TRUCE:
-                fRelation = com.massivecraft.factions.struct.Relation.TRUCE;
+                rel = Rel.TRUCE;
                 break;
             case NEUTRAL:
-                fRelation = com.massivecraft.factions.struct.Relation.NEUTRAL;
+                rel = Rel.NEUTRAL;
                 break;
             case ENEMY:
-                fRelation = com.massivecraft.factions.struct.Relation.ENEMY;
+                rel = Rel.ENEMY;
                 break;
         }
-        return fRelation;
+        return rel;
     }
 
-    public ConquerPlayer.Role translate(Role fRole) {
-        if (fRole == null) {
+    public ConquerPlayer.Role translateRole(Rel rel) {
+        if (rel == null) {
             return null;
         }
-        switch (fRole) {
-            case ADMIN:
-                return ConquerPlayer.Role.ADMIN;
-            case MODERATOR:
-                return ConquerPlayer.Role.MODERATOR;
-            case NORMAL:
+        switch (rel) {
+            case MEMBER:
                 return ConquerPlayer.Role.NORMAL;
             case RECRUIT:
                 return ConquerPlayer.Role.RECRUIT;
+            case OFFICER:
+                return ConquerPlayer.Role.MODERATOR;
+            case LEADER:
+                return ConquerPlayer.Role.ADMIN;
         }
         return ConquerPlayer.Role.OTHER;
     }
 
-    public Role translate(ConquerPlayer.Role role) {
+    public Rel translateRole(ConquerPlayer.Role role) {
         if (role == null) {
             return null;
         }
-        com.massivecraft.factions.struct.Role fRole = null;
+        Rel rel = null;
         switch (role) {
             case NORMAL:
-                fRole = com.massivecraft.factions.struct.Role.NORMAL;
+                rel = Rel.MEMBER;
                 break;
             case ADMIN:
-                fRole = com.massivecraft.factions.struct.Role.ADMIN;
+                rel = Rel.LEADER;
                 break;
             case MODERATOR:
-                fRole = com.massivecraft.factions.struct.Role.MODERATOR;
+                rel = Rel.OFFICER;
                 break;
             case RECRUIT:
-                fRole = com.massivecraft.factions.struct.Role.RECRUIT;
+                rel = Rel.RECRUIT;
                 break;
         }
-        return fRole;
+        return rel;
     }
 
     public FLocation translate(Location location) {
         return new FLocation(location);
+    }
+
+    public Location translate(FLocation fLocation) {
+        return new Location(fLocation.getWorld(), fLocation.getX() * 16, 0, fLocation.getZ());
     }
 }

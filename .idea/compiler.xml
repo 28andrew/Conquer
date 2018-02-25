@@ -10,10 +10,14 @@
       <module name="factions-impl_test" target="1.8" />
       <module name="factions-uuid-impl_main" target="1.8" />
       <module name="factions-uuid-impl_test" target="1.8" />
+      <module name="factionsone-impl_main" target="1.8" />
+      <module name="factionsone-impl_test" target="1.8" />
       <module name="factionsuuid-impl_main" target="1.8" />
       <module name="factionsuuid-impl_test" target="1.8" />
       <module name="mfactions-impl_main" target="1.8" />
       <module name="mfactions-impl_test" target="1.8" />
+      <module name="onefactions-impl_main" target="1.8" />
+      <module name="onefactions-impl_test" target="1.8" />
       <module name="plugin_main" target="1.8" />
       <module name="plugin_test" target="1.8" />
     </bytecodeTargetLevel>

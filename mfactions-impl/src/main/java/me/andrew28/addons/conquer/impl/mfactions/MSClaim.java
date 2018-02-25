@@ -9,13 +9,14 @@ import me.andrew28.addons.conquer.api.ClaimType;
 import me.andrew28.addons.conquer.api.ConquerClaim;
 import org.bukkit.Chunk;
 
+import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
  * @author Andrew Tran
  */
 public class MSClaim extends ConquerClaim<Chunk> {
-    private static WeakHashMap<Object, MSClaim> cache = new WeakHashMap<>();
+    private static Map<Object, MSClaim> cache = new WeakHashMap<>();
     private Chunk chunk;
     private FactionColl factionColl;
     private BoardColl boardColl;

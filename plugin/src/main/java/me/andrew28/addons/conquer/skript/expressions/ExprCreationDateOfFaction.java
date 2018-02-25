@@ -29,7 +29,8 @@ public class ExprCreationDateOfFaction extends SimplePropertyExpression<ConquerF
 
     @Override
     public Date convert(ConquerFaction faction) {
-        return new Date(faction.getCreationDate().getTime());
+        java.util.Date date = faction.getCreationDate();
+        return date == null ? null : new Date(date.getTime());
     }
 
     @Override

@@ -1,8 +1,7 @@
-package me.andrew28.addons.conquer.impl.factionsuuid;
+package me.andrew28.addons.conquer.impl.factionsone;
 
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.Factions;
-import me.andrew28.addons.conquer.api.sender.AllPermissionsSender;
 import me.andrew28.addons.conquer.api.ConquerFaction;
 import me.andrew28.addons.conquer.api.ConquerPlayer;
 import org.bukkit.Bukkit;
@@ -17,50 +16,50 @@ import java.util.WeakHashMap;
 /**
  * @author Andrew Tran
  */
-public class FUPlayer extends ConquerPlayer {
-    private static Map<Object, FUPlayer> cache = new WeakHashMap<>();
-    private FUPlugin plugin;
+public class FOPlayer extends ConquerPlayer {
+    private static Map<Object, FOPlayer> cache = new WeakHashMap<>();
+    private FOPlugin plugin;
     private Factions factions;
     private FPlayer fPlayer;
     private OfflinePlayer offlinePlayer;
 
-    private FUPlayer(FUPlugin plugin, FPlayer fPlayer) {
+    private FOPlayer(FOPlugin plugin, FPlayer fPlayer) {
         this.plugin = plugin;
         this.factions = plugin.getFactions();
         this.fPlayer = fPlayer;
         this.offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(fPlayer.getId()));
     }
 
-    private FUPlayer(FUPlugin plugin, OfflinePlayer player) {
+    private FOPlayer(FOPlugin plugin, OfflinePlayer player) {
         this.plugin = plugin;
         this.offlinePlayer = player;
         if (player instanceof Player) {
-            this.fPlayer = plugin.getfPlayers().getByPlayer((Player) player);
+            this.fPlayer = plugin.getfPlayers().get((Player) player);
         } else {
-            this.fPlayer = plugin.getfPlayers().getByOfflinePlayer(player);
+            this.fPlayer = plugin.getfPlayers().get(player);
         }
     }
 
-    public static FUPlayer get(FUPlugin plugin, FPlayer fPlayer) {
+    public static FOPlayer get(FOPlugin plugin, FPlayer fPlayer) {
         if (fPlayer == null) {
             return null;
         }
         if (!cache.containsKey(fPlayer)) {
-            FUPlayer fuPlayer = new FUPlayer(plugin, fPlayer);
-            cache.put(fPlayer, fuPlayer);
-            return fuPlayer;
+            FOPlayer foPlayer = new FOPlayer(plugin, fPlayer);
+            cache.put(fPlayer, foPlayer);
+            return foPlayer;
         }
         return cache.get(fPlayer);
     }
 
-    public static FUPlayer get(FUPlugin plugin, OfflinePlayer player) {
+    public static FOPlayer get(FOPlugin plugin, OfflinePlayer player) {
         if (player == null) {
             return null;
         }
         if (!cache.containsKey(player)) {
-            FUPlayer fuPlayer = new FUPlayer(plugin, player);
-            cache.put(player, fuPlayer);
-            return fuPlayer;
+            FOPlayer foPlayer = new FOPlayer(plugin, player);
+            cache.put(player, foPlayer);
+            return foPlayer;
         }
         return cache.get(player);
     }
@@ -77,12 +76,12 @@ public class FUPlayer extends ConquerPlayer {
 
     @Override
     public ConquerFaction getFaction() {
-        return FUFaction.get(plugin, fPlayer.getFaction());
+        return FOFaction.get(plugin, fPlayer.getFaction());
     }
 
     @Override
     public void setFaction(ConquerFaction faction) {
-        fPlayer.setFaction(faction == null ? factions.getWilderness() : ((FUFaction) faction).getRawFaction());
+        fPlayer.setFaction(faction == null ? factions.get("0") : ((FOFaction) faction).getRawFaction());
     }
 
     @Override
@@ -102,17 +101,17 @@ public class FUPlayer extends ConquerPlayer {
 
     @Override
     public void setLastActivity(Date date) {
-        fPlayer.setLastFrostwalkerMessage();
+        fPlayer.setLastLoginTime(date.getTime());
     }
 
     @Override
     public Role getRole() {
-        return plugin.translate(fPlayer.getRole());
+        return plugin.translateRole(fPlayer.getRole());
     }
 
     @Override
     public void setRole(Role role) {
-        fPlayer.setRole(plugin.translate(role));
+        fPlayer.setRole(plugin.translateRole(role));
     }
 
     @Override
@@ -122,7 +121,7 @@ public class FUPlayer extends ConquerPlayer {
 
     @Override
     public void setTitle(String title) {
-        fPlayer.setTitle(new AllPermissionsSender(), title);
+        fPlayer.setTitle(title);
     }
 
     @Override
@@ -142,7 +141,7 @@ public class FUPlayer extends ConquerPlayer {
 
     @Override
     public void setPower(double power) {
-        fPlayer.alterPower(power - getPower());
+        /* UNSUPPORTED */
     }
 
     @Override

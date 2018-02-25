@@ -41,7 +41,7 @@ public class MSFaction extends ConquerFaction {
         }
     }
 
-    private static WeakHashMap<Faction, MSFaction> cache = new WeakHashMap<>();
+    private static Map<Faction, MSFaction> cache = new WeakHashMap<>();
     private MSPlugin plugin;
     private FactionColl factionColl;
     private MPlayerColl mPlayerColl;

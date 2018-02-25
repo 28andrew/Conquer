@@ -1,4 +1,4 @@
-package me.andrew28.addons.conquer.impl.factionsuuid;
+package me.andrew28.addons.conquer.impl.factionsone;
 
 import ch.njol.yggdrasil.Fields;
 import com.massivecraft.factions.Board;
@@ -16,50 +16,48 @@ import java.util.WeakHashMap;
 /**
  * @author Andrew Tran
  */
-public class FUClaim extends ConquerClaim<Chunk> {
-    private static Map<Object, FUClaim> cache = new WeakHashMap<>();
+public class FOClaim extends ConquerClaim<Chunk> {
+    private static Map<Object, FOClaim> cache = new WeakHashMap<>();
     private Chunk chunk;
     private Factions factions;
-    private Board board;
     private FLocation fLocation;
 
-    private FUClaim(FUPlugin plugin, FLocation fLocation) {
+    private FOClaim(FOPlugin plugin,FLocation fLocation) {
         this.chunk = Bukkit.getWorld(fLocation.getWorldName())
                 .getChunkAt(Math.toIntExact(fLocation.getX()), Math.toIntExact(fLocation.getZ()));
         this.factions = plugin.getFactions();
-        this.board = plugin.getBoard();
         this.fLocation = fLocation;
     }
 
-    private FUClaim(FUPlugin plugin, Chunk chunk) {
+    private FOClaim(FOPlugin plugin, Chunk chunk) {
         this.chunk = chunk;
         this.factions = plugin.getFactions();
-        this.board = plugin.getBoard();
         this.fLocation = new FLocation(chunk.getWorld().getName(), chunk.getX(), chunk.getZ());
     }
 
-    public static FUClaim get(FUPlugin plugin, FLocation fLocation) {
+    public static FOClaim get(FOPlugin plugin, FLocation fLocation) {
         if (fLocation == null) {
             return null;
         }
         if (!cache.containsKey(fLocation)) {
-            FUClaim fuClaim = new FUClaim(plugin, fLocation);
-            cache.put(fLocation, fuClaim);
-            return fuClaim;
+            FOClaim foClaim = new FOClaim(plugin, fLocation);
+            cache.put(fLocation, foClaim);
+            return foClaim;
         }
         return cache.get(fLocation);
     }
 
-    public static FUClaim get(FUPlugin plugin, Chunk chunk) {
+    public static FOClaim get(FOPlugin plugin, Chunk chunk) {
         if (chunk == null) {
             return null;
         }
         if (!cache.containsKey(chunk)) {
-            FUClaim fuClaim = new FUClaim(plugin, chunk);
+            FOClaim fuClaim = new FOClaim(plugin, chunk);
             cache.put(chunk, fuClaim);
         }
         return cache.get(chunk);
     }
+
 
     @Override
     public Chunk getRepresentation() {
@@ -68,12 +66,12 @@ public class FUClaim extends ConquerClaim<Chunk> {
 
     @Override
     public ClaimType getType() {
-        Faction faction = board.getFactionAt(fLocation);
-        if (faction.isWilderness()) {
+        Faction faction = Board.getFactionAt(fLocation);
+        if (faction.isNone()) {
             return ClaimType.WILDERNESS;
-        } else if (faction.isSafeZone()) {
+        } else if (faction.getId().equals(FOPlugin.SAFE_ZONE_ID)) {
             return ClaimType.SAFE_ZONE;
-        } else if (faction.isWarZone()) {
+        } else if (faction.getId().equals(FOPlugin.WAR_ZONE_ID)) {
             return ClaimType.WAR_ZONE;
         } else {
             return ClaimType.FACTION;
@@ -85,19 +83,20 @@ public class FUClaim extends ConquerClaim<Chunk> {
         Faction faction;
         switch (type) {
             case WILDERNESS:
-                faction = factions.getWilderness();
+                faction = factions.get(FOPlugin.WILDERNESS_ID);
                 break;
             case SAFE_ZONE:
-                faction = factions.getSafeZone();
+                faction = factions.get(FOPlugin.SAFE_ZONE_ID);
                 break;
             case WAR_ZONE:
-                faction = factions.getWarZone();
+                faction = factions.get(FOPlugin.WAR_ZONE_ID);
                 break;
             default:
                 return;
         }
-        board.setFactionAt(faction, fLocation);
+        Board.setFactionAt(faction, fLocation);
     }
+
     @Override
     public Fields serialize() {
         Fields fields = new Fields();

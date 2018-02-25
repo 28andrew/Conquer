@@ -8,6 +8,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/api.iml" filepath="$PROJECT_DIR$/.idea/modules/api/api.iml" group="api" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/api/api_main.iml" group="api" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/api/api_test.iml" group="api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/factionsone-impl/factionsone-impl.iml" filepath="$PROJECT_DIR$/.idea/modules/factionsone-impl/factionsone-impl.iml" group="factionsone-impl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/factionsone-impl/factionsone-impl_main.iml" filepath="$PROJECT_DIR$/.idea/modules/factionsone-impl/factionsone-impl_main.iml" group="factionsone-impl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/factionsone-impl/factionsone-impl_test.iml" filepath="$PROJECT_DIR$/.idea/modules/factionsone-impl/factionsone-impl_test.iml" group="factionsone-impl" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/factionsuuid-impl/factionsuuid-impl.iml" filepath="$PROJECT_DIR$/.idea/modules/factionsuuid-impl/factionsuuid-impl.iml" group="factionsuuid-impl" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/factionsuuid-impl/factionsuuid-impl_main.iml" filepath="$PROJECT_DIR$/.idea/modules/factionsuuid-impl/factionsuuid-impl_main.iml" group="factionsuuid-impl" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/factionsuuid-impl/factionsuuid-impl_test.iml" filepath="$PROJECT_DIR$/.idea/modules/factionsuuid-impl/factionsuuid-impl_test.iml" group="factionsuuid-impl" />

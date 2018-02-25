@@ -1,12 +1,14 @@
-package me.andrew28.addons.conquer.impl.factionsuuid;
+package me.andrew28.addons.conquer.impl.factionsone;
 
 import ch.njol.yggdrasil.Fields;
 import com.massivecraft.factions.Board;
+import com.massivecraft.factions.FLocation;
 import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.Factions;
-import com.massivecraft.factions.util.LazyLocation;
-import com.massivecraft.factions.zcore.util.TL;
+import com.massivecraft.factions.struct.FFlag;
+import com.massivecraft.factions.struct.TerritoryAccess;
+import com.massivecraft.factions.zcore.persist.Entity;
 import me.andrew28.addons.conquer.api.ConquerClaim;
 import me.andrew28.addons.conquer.api.ConquerFaction;
 import me.andrew28.addons.conquer.api.ConquerPlayer;
@@ -15,10 +17,14 @@ import me.andrew28.addons.conquer.api.sender.MessageOnlySender;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 
-import java.util.AbstractMap;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.stream.Collectors;
@@ -26,33 +32,44 @@ import java.util.stream.Collectors;
 /**
  * @author Andrew Tran
  */
-public class FUFaction extends ConquerFaction {
-    private static String DEFAULT_DESCRIPTION = TL.GENERIC_DEFAULTDESCRIPTION.toString();
-    private static Map<Faction, FUFaction> cache = new WeakHashMap<>();
-    private FUPlugin plugin;
+public class FOFaction extends ConquerFaction {
+    private static String DEFAULT_DESCRIPTION = "Default faction description :(";
+    private static Method setIdMethod;
+    private static Field flocationIdsField;
+    static {
+        try {
+            setIdMethod = Entity.class.getDeclaredMethod("setId", String.class);
+            flocationIdsField = Board.class.getDeclaredField("flocationIds");
+            flocationIdsField.setAccessible(true);
+        } catch (NoSuchMethodException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Map<Faction, FOFaction> cache = new WeakHashMap<>();
+    private FOPlugin plugin;
     private Factions factions;
     private FPlayers fPlayers;
-    private Board board;
     private Faction faction;
     private CommandSender sender;
-    private Map<String, Location> warpMap;
 
-    private FUFaction(FUPlugin plugin, Faction faction) {
+    private FOFaction(FOPlugin plugin, Faction faction) {
         this.plugin = plugin;
         this.factions = plugin.getFactions();
         this.fPlayers = plugin.getfPlayers();
-        this.board = plugin.getBoard();
         this.faction = faction;
     }
 
-    public static FUFaction get(FUPlugin plugin, Faction faction) {
-        if (faction == null || !faction.isNormal()) {
+    public static FOFaction get(FOPlugin plugin, Faction faction) {
+        if (faction == null || !faction.isNormal() ||
+                faction.getId().equals(FOPlugin.SAFE_ZONE_ID) ||
+                faction.getId().equals(FOPlugin.WAR_ZONE_ID)) {
             return null;
         }
         if (!cache.containsKey(faction)) {
-            FUFaction fuFaction = new FUFaction(plugin, faction);
-            cache.put(faction, fuFaction);
-            return fuFaction;
+            FOFaction foFaction = new FOFaction(plugin, faction);
+            cache.put(faction, foFaction);
+            return foFaction;
         }
         return cache.get(faction);
     }
@@ -64,7 +81,11 @@ public class FUFaction extends ConquerFaction {
 
     @Override
     public void setId(String id) {
-        faction.setId(id);
+        try {
+            setIdMethod.invoke(faction, id);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -101,12 +122,13 @@ public class FUFaction extends ConquerFaction {
 
     @Override
     public Date getCreationDate() {
-        return new Date(faction.getFoundedDate());
+        /* UNSUPPORTED */
+        return null;
     }
 
     @Override
     public void setCreationDate(Date date) {
-        faction.setFoundedDate(date.getTime());
+        /* UNSUPPORTED */
     }
 
     @Override
@@ -116,7 +138,7 @@ public class FUFaction extends ConquerFaction {
 
     @Override
     public void setPower(double power) {
-        faction.setPermanentPower((int) power);
+        /* UNSUPPORTED */
     }
 
     @Override
@@ -136,7 +158,7 @@ public class FUFaction extends ConquerFaction {
 
     @Override
     public ConquerPlayer getLeader() {
-        return FUPlayer.get(plugin, faction.getFPlayerAdmin());
+        return FOPlayer.get(plugin, faction.getFPlayerLeader());
     }
 
     @Override
@@ -158,18 +180,18 @@ public class FUFaction extends ConquerFaction {
     public ConquerPlayer[] getMembers() {
         return faction.getFPlayers()
                 .stream()
-                .map(fPlayer -> FUPlayer.get(plugin, fPlayer))
+                .map(fPlayer -> FOPlayer.get(plugin, fPlayer))
                 .toArray(ConquerPlayer[]::new);
     }
 
     @Override
     public void addMember(ConquerPlayer member) {
-        ((FUPlayer) member).getRawPlayer().setFaction(faction);
+        ((FOPlayer) member).getRawPlayer().setFaction(faction);
     }
 
     @Override
     public void removeMember(ConquerPlayer member) {
-        faction.removeFPlayer(((FUPlayer) member).getRawPlayer());
+        ((FOPlayer) member).getRawPlayer().setFaction(factions.get("0"));
     }
 
     @Override
@@ -192,109 +214,60 @@ public class FUFaction extends ConquerFaction {
 
     @Override
     public Map<String, Location> getWarps() {
-        if (warpMap == null) {
-            warpMap = new AbstractMap<String, Location>() {
-                @Override
-                public Location get(Object key) {
-                    if (!(key instanceof String)) {
-                        return null;
-                    }
-                    LazyLocation lazyLocation = faction.getWarp((String) key);
-                    return lazyLocation == null ? null : lazyLocation.getLocation();
-                }
-
-                @Override
-                public boolean containsKey(Object key) {
-                    return key instanceof String && faction.isWarp((String) key);
-                }
-
-                @Override
-                public Location put(String key, Location value) {
-                    Location previous = get(key);
-                    faction.setWarp(key, new LazyLocation(value));
-                    return previous;
-                }
-
-                @Override
-                public Set<Entry<String, Location>> entrySet() {
-                    return faction.getWarps().entrySet()
-                            .stream()
-                            .map(entry ->
-                                    new SimpleEntry<>(entry.getKey(), entry.getValue().getLocation()))
-                            .collect(Collectors.toSet());
-                }
-
-                @Override
-                public void clear() {
-                    faction.clearWarps();
-                }
-
-                @Override
-                public Location remove(Object key) {
-                    if (!(key instanceof String)) {
-                        return null;
-                    }
-                    Location previous = get(key);
-                    faction.removeWarp((String) key);
-                    return previous;
-                }
-
-                @Override
-                public int size() {
-                    return super.size();
-                }
-            };
-        }
-        return warpMap;
+        /* UNSUPPORTED */
+        return null;
     }
 
     @Override
     public boolean hasWarpPassword(String warp) {
-        return faction.hasWarpPassword(warp);
+        /* UNSUPPORTED */
+        return false;
     }
 
     @Override
     public boolean isWarpPassword(String warp, String password) {
-        return faction.isWarpPassword(warp, password);
+        /* UNSUPPORTED */
+        return false;
     }
 
     @Override
     public String getWarpPassword(String warp) {
-        return hasWarpPassword(warp) ? "" : null;
+        /* UNSUPPORTED */
+        return null;
     }
 
     @Override
     public void setWarpPassword(String warp, String password) {
-        faction.setWarpPassword(warp, password);
+        /* UNSUPPORTED */
     }
 
     @Override
     public Set<ConquerPlayer> getInvited() {
         return faction.getInvites()
                 .stream()
-                .map(id -> fPlayers.getById(id))
-                .map(fPlayer -> FUPlayer.get(plugin, fPlayer))
+                .map(id -> fPlayers.get(id))
+                .map(fPlayer -> FOPlayer.get(plugin, fPlayer))
                 .collect(Collectors.toSet());
     }
 
     @Override
     public void invite(ConquerPlayer player) {
-        faction.invite(((FUPlayer) player).getRawPlayer());
+        faction.invite(((FOPlayer) player).getRawPlayer());
     }
 
     @Override
     public void deinvite(ConquerPlayer player) {
-        faction.deinvite(((FUPlayer) player).getRawPlayer());
+        faction.deinvite(((FOPlayer) player).getRawPlayer());
     }
 
     @Override
     public boolean isPeaceful() {
-        return faction.isPeaceful();
+        return faction.getFlag(FFlag.PEACEFUL);
     }
 
     @Override
     public void setPeaceful(boolean peaceful) {
-        faction.setPeaceful(peaceful);
+        faction.setFlag(FFlag.PEACEFUL, peaceful);
     }
 
     @Override
@@ -309,45 +282,63 @@ public class FUFaction extends ConquerFaction {
 
     @Override
     public Relation getRelationTo(ConquerFaction faction) {
-        return plugin.translate(this.faction.getRelationTo(((FUFaction) faction).getRawFaction()));
+        return plugin.translateRelation(this.faction.getRelationTo(((FOFaction) faction).getRawFaction()));
     }
 
     @Override
     public void setRelationBetween(ConquerFaction faction, Relation relation) {
-        this.faction.setRelationWish(((FUFaction) faction).getRawFaction(), plugin.translate(relation));
+        this.faction.setRelationWish(((FOFaction) faction).getRawFaction(), plugin.translateRelation(relation));
+    }
+
+    @SuppressWarnings("unchecked")
+    private Map<FLocation, TerritoryAccess> getflocationIds() {
+        try {
+            return (Map<FLocation, TerritoryAccess>) flocationIdsField.get(null);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public ConquerClaim<?>[] getClaims() {
-        return faction.getAllClaims()
-                .stream()
-                .map(fLocation -> FUClaim.get(plugin, fLocation))
-                .toArray(ConquerClaim[]::new);
+        Set<ConquerClaim> claims = new HashSet<>();
+        Map<FLocation, TerritoryAccess> map = getflocationIds();
+        if (map == null) {
+            return null;
+        }
+        for (Map.Entry<FLocation, TerritoryAccess> entry : map.entrySet()) {
+            String id = entry.getValue().getHostFactionID();
+            if (Objects.equals(id, faction.getId())) {
+                claims.add(FOClaim.get(plugin, entry.getKey()));
+            }
+        }
+        return claims.toArray(new ConquerClaim[claims.size()]);
     }
 
     @Override
     public void claim(ConquerClaim<?> claim) {
-        board.setFactionAt(faction, ((FUClaim) claim).getRawfLocation());
+        Board.setFactionAt(faction, ((FOClaim) claim).getRawfLocation());
     }
 
     @Override
     public void claim(Location location) {
-        board.setFactionAt(faction, plugin.translate(location));
+        Board.setFactionAt(faction, plugin.translate(location));
     }
 
     @Override
     public void unclaim(ConquerClaim<?> claim) {
-        board.setFactionAt(factions.getWilderness(), ((FUClaim) claim).getRawfLocation());
+        Board.setFactionAt(factions.get(FOPlugin.WILDERNESS_ID), ((FOClaim) claim).getRawfLocation());
     }
 
     @Override
     public void unclaim(Location location) {
-        board.setFactionAt(factions.getWilderness(), plugin.translate(location));
+        Board.setFactionAt(factions.get(FOPlugin.WILDERNESS_ID), plugin.translate(location));
     }
 
     @Override
     public void disband() {
-        factions.removeFaction(faction.getId());
+        faction.detach();
     }
 
     @Override
