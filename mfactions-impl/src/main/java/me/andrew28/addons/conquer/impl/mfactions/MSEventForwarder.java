@@ -94,7 +94,7 @@ class MSEventForwarder extends EventForwarder {
 
         ConquerFactionRelationWishEvent forwardWishEvent =
                 new ConquerFactionRelationWishEvent(player, faction, otherFaction, oldRelation, newRelation);
-        callEvent(event);
+        callEvent(forwardWishEvent);
         if (forwardWishEvent.isCancelled()) {
             event.setCancelled(true);
             return;
@@ -102,7 +102,7 @@ class MSEventForwarder extends EventForwarder {
 
         ConquerFactionRelationEvent forwardEvent =
                 new ConquerFactionRelationEvent(faction, otherFaction, oldRelation, newRelation);
-        callEvent(event);
+        callEvent(forwardEvent);
     }
 
     @EventHandler
