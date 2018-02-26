@@ -240,21 +240,6 @@ public class Types {
                 }));
         Converters.registerConverter(OfflinePlayer.class, ConquerPlayer.class,
                 (Converter<OfflinePlayer, ConquerPlayer>) factionsPlugin::getConquerPlayer);
-        Converters.registerConverter(String.class, ConquerPlayer.class, new Getter<ConquerPlayer, String>() {
-            @Override
-            public ConquerPlayer get(String arg) {
-                OfflinePlayer player = Bukkit.getOfflinePlayer(arg);
-                // Also try UUID
-                if (player == null && arg.split("-").length == 5) {
-                    player = Bukkit.getOfflinePlayer(UUID.fromString(arg));
-                }
-                // Still null?
-                if (player == null) {
-                    return null;
-                }
-                return factionsPlugin.getConquerPlayer(player);
-            }
-        });
         Converters.registerConverter(ConquerPlayer.class, OfflinePlayer.class,
                 (Converter<ConquerPlayer, OfflinePlayer>) ConquerPlayer::getOfflinePlayer);
         Converters.registerConverter(OfflinePlayer.class, ConquerPlayer.class,
