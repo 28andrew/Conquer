@@ -9,7 +9,6 @@ import ch.njol.skript.classes.Serializer;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.registrations.Converters;
-import ch.njol.skript.util.Getter;
 import ch.njol.skript.util.StringMode;
 import ch.njol.yggdrasil.Fields;
 import me.andrew28.addons.conquer.Conquer;
@@ -21,7 +20,6 @@ import me.andrew28.addons.conquer.api.FactionsPlugin;
 import me.andrew28.addons.conquer.api.PowerHolder;
 import me.andrew28.addons.conquer.api.Relation;
 import me.andrew28.addons.conquer.util.EnumParser;
-import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -29,7 +27,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.StreamCorruptedException;
-import java.util.UUID;
 
 /**
  * @author Andrew Tran
