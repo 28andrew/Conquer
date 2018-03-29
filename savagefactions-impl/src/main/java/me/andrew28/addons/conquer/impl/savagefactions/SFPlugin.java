@@ -1,4 +1,4 @@
-package me.andrew28.addons.conquer.impl.factionsuuid;
+package me.andrew28.addons.conquer.impl.savagefactions;
 
 import ch.njol.yggdrasil.Fields;
 import com.massivecraft.factions.Board;
@@ -23,13 +23,13 @@ import java.io.StreamCorruptedException;
 /**
  * @author Andrew Tran
  */
-public class FUPlugin extends FactionsPlugin {
+public class SFPlugin extends FactionsPlugin {
     private Factions factions;
     private FPlayers fPlayers;
     private Board board;
 
-    public FUPlugin() {
-        super("Factions UUID");
+    public SFPlugin() {
+        super("Savage Factions");
     }
 
     @Override
@@ -38,9 +38,9 @@ public class FUPlugin extends FactionsPlugin {
         return plugin != null &&
                 plugin.getDescription() != null &&
                 plugin.getDescription().getAuthors() != null &&
-                plugin.getDescription().getAuthors().size() == 3 &&
-                plugin.getDescription().getAuthors().get(2).equals("drtshock") &&
-                plugin.getDescription().getWebsite() == null;
+                plugin.getDescription().getAuthors().contains("ProSavage") &&
+                plugin.getDescription().getVersion() != null &&
+                plugin.getDescription().getVersion().contains("SF");
     }
 
     @Override
@@ -53,7 +53,7 @@ public class FUPlugin extends FactionsPlugin {
     @Override
     public EventForwarder getEventForwarder() {
         if (eventForwarder == null) {
-            eventForwarder = new FUEventForwarder(this);
+            eventForwarder = new SFEventForwarder(this);
         }
         return eventForwarder;
     }
@@ -61,19 +61,19 @@ public class FUPlugin extends FactionsPlugin {
     @Override
     public FactionResolver getFactionResolver() {
         if (factionResolver == null) {
-            factionResolver = new FUFactionResolver(this);
+            factionResolver = new SFFactionResolver(this);
         }
         return factionResolver;
     }
 
     @Override
     public ConquerPlayer getConquerPlayer(OfflinePlayer player) {
-        return FUPlayer.get(this, player);
+        return SFPlayer.get(this, player);
     }
 
     @Override
     public ConquerClaim<Chunk> getClaim(Location location) {
-        return FUClaim.get(this, location.getChunk());
+        return SFClaim.get(this, location.getChunk());
     }
 
     @Override
@@ -92,7 +92,7 @@ public class FUPlugin extends FactionsPlugin {
         if (chunk == null) {
             throw new StreamCorruptedException();
         }
-        return FUClaim.get(this, chunk);
+        return SFClaim.get(this, chunk);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class FUPlugin extends FactionsPlugin {
         if (id == null) {
             throw new StreamCorruptedException();
         }
-        return FUFaction.get(this, factions.getFactionById(id));
+        return SFFaction.get(this, factions.getFactionById(id));
     }
 
     public Factions getFactions() {

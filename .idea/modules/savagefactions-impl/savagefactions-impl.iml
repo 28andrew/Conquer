@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":savagefactions-impl" external.linked.project.path="$MODULE_DIR$/../../../savagefactions-impl" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="me.andrew28.addons" external.system.module.version="1.2.0" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../savagefactions-impl">
+      <excludeFolder url="file://$MODULE_DIR$/../../../savagefactions-impl/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../savagefactions-impl/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../savagefactions-impl/out" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

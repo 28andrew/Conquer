@@ -13,6 +13,7 @@
     <orderEntry type="module" module-name="mfactions-impl_main" />
     <orderEntry type="module" module-name="factionsone-impl_main" />
     <orderEntry type="module" module-name="legacyfactions-impl_main" />
+    <orderEntry type="module" module-name="savagefactions-impl_main" />
     <orderEntry type="library" name="Gradle: org.bstats:bstats-bukkit:1.2" level="project" />
     <orderEntry type="module" module-name="api_main" />
     <orderEntry type="library" name="Gradle: com.massivecraft:Factions:1.6.9.5-U0.2.1-SNAPSHOT" level="project" />
@@ -20,9 +21,10 @@
     <orderEntry type="library" name="Gradle: :MassiveFactions:" level="project" />
     <orderEntry type="library" name="Gradle: :FactionsOne:" level="project" />
     <orderEntry type="library" name="Gradle: com.github.redstone:LegacyFactions:v1.4.3" level="project" />
+    <orderEntry type="library" name="Gradle: :SavageFactions:" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: junit:junit:4.10" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hamcrest:hamcrest-core:1.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: commons-lang:commons-lang:2.6" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: junit:junit:4.10" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: com.google.guava:guava:21.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: ch.njol:skript:2.2-dev32" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT" level="project" />

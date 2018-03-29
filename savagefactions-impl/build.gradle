@@ -1,0 +1,12 @@
+dependencies {
+    compile project(':api')
+    compile name: 'SavageFactions'
+}
+
+shadowJar {
+    archiveName = "savagefactions-impl-${version}.${extension}"
+    dependencies {
+        exclude project(':api')
+        exclude dependency(name: 'SavageFactions')
+    }
+}

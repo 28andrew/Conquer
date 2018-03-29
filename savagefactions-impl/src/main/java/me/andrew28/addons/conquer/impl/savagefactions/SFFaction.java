@@ -1,4 +1,4 @@
-package me.andrew28.addons.conquer.impl.factionsuuid;
+package me.andrew28.addons.conquer.impl.savagefactions;
 
 import ch.njol.yggdrasil.Fields;
 import com.massivecraft.factions.Board;
@@ -26,10 +26,10 @@ import java.util.stream.Collectors;
 /**
  * @author Andrew Tran
  */
-public class FUFaction extends ConquerFaction {
+public class SFFaction extends ConquerFaction {
     private static final String DEFAULT_DESCRIPTION = TL.GENERIC_DEFAULTDESCRIPTION.toString();
-    private static Map<Faction, FUFaction> cache = new WeakHashMap<>();
-    private FUPlugin plugin;
+    private static Map<Faction, SFFaction> cache = new WeakHashMap<>();
+    private SFPlugin plugin;
     private Factions factions;
     private FPlayers fPlayers;
     private Board board;
@@ -37,7 +37,7 @@ public class FUFaction extends ConquerFaction {
     private CommandSender sender;
     private Map<String, Location> warpMap;
 
-    private FUFaction(FUPlugin plugin, Faction faction) {
+    private SFFaction(SFPlugin plugin, Faction faction) {
         this.plugin = plugin;
         this.factions = plugin.getFactions();
         this.fPlayers = plugin.getFPlayers();
@@ -45,12 +45,12 @@ public class FUFaction extends ConquerFaction {
         this.faction = faction;
     }
 
-    public static FUFaction get(FUPlugin plugin, Faction faction) {
+    public static SFFaction get(SFPlugin plugin, Faction faction) {
         if (faction == null || !faction.isNormal()) {
             return null;
         }
         if (!cache.containsKey(faction)) {
-            FUFaction fuFaction = new FUFaction(plugin, faction);
+            SFFaction fuFaction = new SFFaction(plugin, faction);
             cache.put(faction, fuFaction);
             return fuFaction;
         }
@@ -136,7 +136,7 @@ public class FUFaction extends ConquerFaction {
 
     @Override
     public ConquerPlayer getLeader() {
-        return FUPlayer.get(plugin, faction.getFPlayerAdmin());
+        return SFPlayer.get(plugin, faction.getFPlayerAdmin());
     }
 
     @Override
@@ -158,18 +158,18 @@ public class FUFaction extends ConquerFaction {
     public ConquerPlayer[] getMembers() {
         return faction.getFPlayers()
                 .stream()
-                .map(fPlayer -> FUPlayer.get(plugin, fPlayer))
+                .map(fPlayer -> SFPlayer.get(plugin, fPlayer))
                 .toArray(ConquerPlayer[]::new);
     }
 
     @Override
     public void addMember(ConquerPlayer member) {
-        ((FUPlayer) member).getRawPlayer().setFaction(faction);
+        ((SFPlayer) member).getRawPlayer().setFaction(faction);
     }
 
     @Override
     public void removeMember(ConquerPlayer member) {
-        faction.removeFPlayer(((FUPlayer) member).getRawPlayer());
+        faction.removeFPlayer(((SFPlayer) member).getRawPlayer());
     }
 
     @Override
@@ -273,18 +273,18 @@ public class FUFaction extends ConquerFaction {
         return faction.getInvites()
                 .stream()
                 .map(id -> fPlayers.getById(id))
-                .map(fPlayer -> FUPlayer.get(plugin, fPlayer))
+                .map(fPlayer -> SFPlayer.get(plugin, fPlayer))
                 .collect(Collectors.toSet());
     }
 
     @Override
     public void invite(ConquerPlayer player) {
-        faction.invite(((FUPlayer) player).getRawPlayer());
+        faction.invite(((SFPlayer) player).getRawPlayer());
     }
 
     @Override
     public void deinvite(ConquerPlayer player) {
-        faction.deinvite(((FUPlayer) player).getRawPlayer());
+        faction.deinvite(((SFPlayer) player).getRawPlayer());
     }
 
     @Override
@@ -309,25 +309,25 @@ public class FUFaction extends ConquerFaction {
 
     @Override
     public Relation getRelationTo(ConquerFaction faction) {
-        return plugin.translate(this.faction.getRelationTo(((FUFaction) faction).getRawFaction()));
+        return plugin.translate(this.faction.getRelationTo(((SFFaction) faction).getRawFaction()));
     }
 
     @Override
     public void setRelationBetween(ConquerFaction faction, Relation relation) {
-        this.faction.setRelationWish(((FUFaction) faction).getRawFaction(), plugin.translate(relation));
+        this.faction.setRelationWish(((SFFaction) faction).getRawFaction(), plugin.translate(relation));
     }
 
     @Override
     public ConquerClaim<?>[] getClaims() {
         return faction.getAllClaims()
                 .stream()
-                .map(fLocation -> FUClaim.get(plugin, fLocation))
+                .map(fLocation -> SFClaim.get(plugin, fLocation))
                 .toArray(ConquerClaim[]::new);
     }
 
     @Override
     public void claim(ConquerClaim<?> claim) {
-        board.setFactionAt(faction, ((FUClaim) claim).getRawFLocation());
+        board.setFactionAt(faction, ((SFClaim) claim).getRawFLocation());
     }
 
     @Override
@@ -337,7 +337,7 @@ public class FUFaction extends ConquerFaction {
 
     @Override
     public void unclaim(ConquerClaim<?> claim) {
-        board.setFactionAt(factions.getWilderness(), ((FUClaim) claim).getRawFLocation());
+        board.setFactionAt(factions.getWilderness(), ((SFClaim) claim).getRawFLocation());
     }
 
     @Override

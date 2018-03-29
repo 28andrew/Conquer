@@ -22,6 +22,8 @@
       <module name="onefactions-impl_test" target="1.8" />
       <module name="plugin_main" target="1.8" />
       <module name="plugin_test" target="1.8" />
+      <module name="savagefactions-impl_main" target="1.8" />
+      <module name="savagefactions-impl_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

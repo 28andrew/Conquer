@@ -14,6 +14,7 @@
     <orderEntry type="module" module-name="mfactions-impl_main" />
     <orderEntry type="module" module-name="factionsone-impl_main" />
     <orderEntry type="module" module-name="legacyfactions-impl_main" />
+    <orderEntry type="module" module-name="savagefactions-impl_main" />
     <orderEntry type="library" name="Gradle: org.bstats:bstats-bukkit:1.2" level="project" />
     <orderEntry type="module" module-name="api_main" />
     <orderEntry type="library" name="Gradle: com.massivecraft:Factions:1.6.9.5-U0.2.1-SNAPSHOT" level="project" />
@@ -21,6 +22,7 @@
     <orderEntry type="library" name="Gradle: :MassiveFactions:" level="project" />
     <orderEntry type="library" name="Gradle: :FactionsOne:" level="project" />
     <orderEntry type="library" name="Gradle: com.github.redstone:LegacyFactions:v1.4.3" level="project" />
+    <orderEntry type="library" name="Gradle: :SavageFactions:" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="plugin_main" />
 </module>

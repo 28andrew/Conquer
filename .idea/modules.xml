@@ -23,6 +23,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/plugin.iml" group="plugin" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/plugin_main.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/plugin_main.iml" group="plugin" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin/plugin_test.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin/plugin_test.iml" group="plugin" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/savagefactions-impl/savagefactions-impl.iml" filepath="$PROJECT_DIR$/.idea/modules/savagefactions-impl/savagefactions-impl.iml" group="savagefactions-impl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/savagefactions-impl/savagefactions-impl_main.iml" filepath="$PROJECT_DIR$/.idea/modules/savagefactions-impl/savagefactions-impl_main.iml" group="savagefactions-impl" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/savagefactions-impl/savagefactions-impl_test.iml" filepath="$PROJECT_DIR$/.idea/modules/savagefactions-impl/savagefactions-impl_test.iml" group="savagefactions-impl" />
     </modules>
   </component>
 </project>

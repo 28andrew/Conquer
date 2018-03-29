@@ -1,10 +1,10 @@
-package me.andrew28.addons.conquer.impl.factionsuuid;
+package me.andrew28.addons.conquer.impl.savagefactions;
 
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.Factions;
-import me.andrew28.addons.conquer.api.sender.AllPermissionsSender;
 import me.andrew28.addons.conquer.api.ConquerFaction;
 import me.andrew28.addons.conquer.api.ConquerPlayer;
+import me.andrew28.addons.conquer.api.sender.AllPermissionsSender;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -17,21 +17,21 @@ import java.util.WeakHashMap;
 /**
  * @author Andrew Tran
  */
-public class FUPlayer extends ConquerPlayer {
-    private static Map<Object, FUPlayer> cache = new WeakHashMap<>();
-    private FUPlugin plugin;
+public class SFPlayer extends ConquerPlayer {
+    private static Map<Object, SFPlayer> cache = new WeakHashMap<>();
+    private SFPlugin plugin;
     private Factions factions;
     private FPlayer fPlayer;
     private OfflinePlayer offlinePlayer;
 
-    private FUPlayer(FUPlugin plugin, FPlayer fPlayer) {
+    private SFPlayer(SFPlugin plugin, FPlayer fPlayer) {
         this.plugin = plugin;
         this.factions = plugin.getFactions();
         this.fPlayer = fPlayer;
         this.offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(fPlayer.getId()));
     }
 
-    private FUPlayer(FUPlugin plugin, OfflinePlayer player) {
+    private SFPlayer(SFPlugin plugin, OfflinePlayer player) {
         this.plugin = plugin;
         this.offlinePlayer = player;
         if (player instanceof Player) {
@@ -41,24 +41,24 @@ public class FUPlayer extends ConquerPlayer {
         }
     }
 
-    public static FUPlayer get(FUPlugin plugin, FPlayer fPlayer) {
+    public static SFPlayer get(SFPlugin plugin, FPlayer fPlayer) {
         if (fPlayer == null) {
             return null;
         }
         if (!cache.containsKey(fPlayer)) {
-            FUPlayer fuPlayer = new FUPlayer(plugin, fPlayer);
+            SFPlayer fuPlayer = new SFPlayer(plugin, fPlayer);
             cache.put(fPlayer, fuPlayer);
             return fuPlayer;
         }
         return cache.get(fPlayer);
     }
 
-    public static FUPlayer get(FUPlugin plugin, OfflinePlayer player) {
+    public static SFPlayer get(SFPlugin plugin, OfflinePlayer player) {
         if (player == null) {
             return null;
         }
         if (!cache.containsKey(player)) {
-            FUPlayer fuPlayer = new FUPlayer(plugin, player);
+            SFPlayer fuPlayer = new SFPlayer(plugin, player);
             cache.put(player, fuPlayer);
             return fuPlayer;
         }
@@ -77,12 +77,12 @@ public class FUPlayer extends ConquerPlayer {
 
     @Override
     public ConquerFaction getFaction() {
-        return FUFaction.get(plugin, fPlayer.getFaction());
+        return SFFaction.get(plugin, fPlayer.getFaction());
     }
 
     @Override
     public void setFaction(ConquerFaction faction) {
-        fPlayer.setFaction(faction == null ? factions.getWilderness() : ((FUFaction) faction).getRawFaction());
+        fPlayer.setFaction(faction == null ? factions.getWilderness() : ((SFFaction) faction).getRawFaction());
     }
 
     @Override
