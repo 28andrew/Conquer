@@ -20,6 +20,7 @@ import me.andrew28.addons.conquer.api.events.ConquerFactionRelationWishEvent;
 import me.andrew28.addons.conquer.api.events.ConquerLandClaimEvent;
 import me.andrew28.addons.conquer.api.events.ConquerPowerLossEvent;
 import me.andrew28.addons.conquer.api.events.ConquerUnclaimAllEvent;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 
 /**
@@ -38,7 +39,9 @@ public class FUEventForwarder extends EventForwarder {
                 new ConquerFactionCreateEvent(FUPlayer.get(plugin, event.getFPlayer()), event.getFactionTag());
         callEvent(forwardEvent);
         if (forwardEvent.isCancelled()) {
-            event.setCancelled(true);
+            if (event instanceof Cancellable) {
+                ((Cancellable) event).setCancelled(true);
+            }
         }
     }
 
