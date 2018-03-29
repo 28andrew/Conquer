@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * @author Andrew Tran
  */
-public abstract class ConquerFaction implements PowerHolder, FieldSerializable<ConquerFaction> {
+public abstract class ConquerFaction implements PowerHolder, SerializableToFields {
     public abstract String getId();
     public abstract void setId(String id);
 

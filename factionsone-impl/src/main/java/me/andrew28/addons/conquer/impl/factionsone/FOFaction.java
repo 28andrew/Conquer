@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  * @author Andrew Tran
  */
 public class FOFaction extends ConquerFaction {
-    private static String DEFAULT_DESCRIPTION = "Default faction description :(";
+    private static final String DEFAULT_DESCRIPTION = "Default faction description :(";
     private static Method setIdMethod;
     private static Field flocationIdsField;
     static {
@@ -45,7 +45,6 @@ public class FOFaction extends ConquerFaction {
             e.printStackTrace();
         }
     }
-
     private static Map<Faction, FOFaction> cache = new WeakHashMap<>();
     private FOPlugin plugin;
     private Factions factions;
@@ -318,7 +317,7 @@ public class FOFaction extends ConquerFaction {
 
     @Override
     public void claim(ConquerClaim<?> claim) {
-        Board.setFactionAt(faction, ((FOClaim) claim).getRawfLocation());
+        Board.setFactionAt(faction, ((FOClaim) claim).getRawFLocation());
     }
 
     @Override
@@ -328,7 +327,7 @@ public class FOFaction extends ConquerFaction {
 
     @Override
     public void unclaim(ConquerClaim<?> claim) {
-        Board.setFactionAt(factions.get(FOPlugin.WILDERNESS_ID), ((FOClaim) claim).getRawfLocation());
+        Board.setFactionAt(factions.get(FOPlugin.WILDERNESS_ID), ((FOClaim) claim).getRawFLocation());
     }
 
     @Override

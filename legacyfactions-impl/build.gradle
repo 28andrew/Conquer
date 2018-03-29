@@ -1,0 +1,14 @@
+dependencies {
+    compile project(':api')
+    compile(group: 'com.github.redstone', name: 'LegacyFactions', version: 'v1.4.3') {
+        transitive = false
+    }
+}
+
+shadowJar {
+    archiveName = "legacyfactions-impl-${version}.${extension}"
+    dependencies {
+        exclude project(':api')
+        exclude dependency('com.github.redstone:LegacyFactions:v1.4.3')
+    }
+}

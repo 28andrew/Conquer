@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":legacyfactions-impl:test" external.linked.project.path="$MODULE_DIR$/../../../legacyfactions-impl" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="me.andrew28.addons" external.system.module.type="sourceSet" external.system.module.version="1.1.2" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output-test url="file://$MODULE_DIR$/../../../legacyfactions-impl/out/test/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../legacyfactions-impl/src/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../../legacyfactions-impl/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../legacyfactions-impl/src/test/resources" type="java-test-resource" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="legacyfactions-impl_main" />
+    <orderEntry type="module" module-name="api_main" />
+    <orderEntry type="library" name="Gradle: com.github.redstone:LegacyFactions:v1.4.3" level="project" />
+  </component>
+  <component name="TestModuleProperties" production-module="legacyfactions-impl_main" />
+</module>

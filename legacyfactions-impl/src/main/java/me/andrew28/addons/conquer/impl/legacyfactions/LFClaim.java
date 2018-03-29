@@ -1,12 +1,12 @@
-package me.andrew28.addons.conquer.impl.factionsone;
+package me.andrew28.addons.conquer.impl.legacyfactions;
 
 import ch.njol.yggdrasil.Fields;
-import com.massivecraft.factions.Board;
-import com.massivecraft.factions.FLocation;
-import com.massivecraft.factions.Faction;
-import com.massivecraft.factions.Factions;
 import me.andrew28.addons.conquer.api.ClaimType;
 import me.andrew28.addons.conquer.api.ConquerClaim;
+import net.redstoneore.legacyfactions.FLocation;
+import net.redstoneore.legacyfactions.entity.Board;
+import net.redstoneore.legacyfactions.entity.Faction;
+import net.redstoneore.legacyfactions.entity.FactionColl;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 
@@ -16,43 +16,45 @@ import java.util.WeakHashMap;
 /**
  * @author Andrew Tran
  */
-public class FOClaim extends ConquerClaim<Chunk> {
-    private static Map<Object, FOClaim> cache = new WeakHashMap<>();
+public class LFClaim extends ConquerClaim<Chunk> {
+    private static Map<Object, LFClaim> cache = new WeakHashMap<>();
     private Chunk chunk;
-    private Factions factions;
+    private FactionColl factionColl;
+    private Board board;
     private FLocation fLocation;
 
-    private FOClaim(FOPlugin plugin, FLocation fLocation) {
-        this.chunk = Bukkit.getWorld(fLocation.getWorldName())
-                .getChunkAt(Math.toIntExact(fLocation.getX()), Math.toIntExact(fLocation.getZ()));
-        this.factions = plugin.getFactions();
+    private LFClaim(LFPlugin plugin, FLocation fLocation) {
+        this.chunk = fLocation.getChunk();
+        this.factionColl = plugin.getFactionColl();
+        this.board = plugin.getBoard();
         this.fLocation = fLocation;
     }
 
-    private FOClaim(FOPlugin plugin, Chunk chunk) {
+    private LFClaim(LFPlugin plugin, Chunk chunk) {
         this.chunk = chunk;
-        this.factions = plugin.getFactions();
+        this.factionColl = plugin.getFactionColl();
+        this.board = plugin.getBoard();
         this.fLocation = new FLocation(chunk.getWorld().getName(), chunk.getX(), chunk.getZ());
     }
 
-    public static FOClaim get(FOPlugin plugin, FLocation fLocation) {
+    public static LFClaim get(LFPlugin plugin, FLocation fLocation) {
         if (fLocation == null) {
             return null;
         }
         if (!cache.containsKey(fLocation)) {
-            FOClaim foClaim = new FOClaim(plugin, fLocation);
-            cache.put(fLocation, foClaim);
-            return foClaim;
+            LFClaim lfClaim = new LFClaim(plugin, fLocation);
+            cache.put(fLocation, lfClaim);
+            return lfClaim;
         }
         return cache.get(fLocation);
     }
 
-    public static FOClaim get(FOPlugin plugin, Chunk chunk) {
+    public static LFClaim get(LFPlugin plugin, Chunk chunk) {
         if (chunk == null) {
             return null;
         }
         if (!cache.containsKey(chunk)) {
-            FOClaim fuClaim = new FOClaim(plugin, chunk);
+            LFClaim fuClaim = new LFClaim(plugin, chunk);
             cache.put(chunk, fuClaim);
         }
         return cache.get(chunk);
@@ -65,12 +67,12 @@ public class FOClaim extends ConquerClaim<Chunk> {
 
     @Override
     public ClaimType getType() {
-        Faction faction = Board.getFactionAt(fLocation);
-        if (faction.isNone()) {
+        Faction faction = board.getFactionAt(fLocation);
+        if (faction.isWilderness()) {
             return ClaimType.WILDERNESS;
-        } else if (faction.getId().equals(FOPlugin.SAFE_ZONE_ID)) {
+        } else if (faction.getId().equals(LFPlugin.SAFE_ZONE_ID)) {
             return ClaimType.SAFE_ZONE;
-        } else if (faction.getId().equals(FOPlugin.WAR_ZONE_ID)) {
+        } else if (faction.getId().equals(LFPlugin.WAR_ZONE_ID)) {
             return ClaimType.WAR_ZONE;
         } else {
             return ClaimType.FACTION;
@@ -82,18 +84,18 @@ public class FOClaim extends ConquerClaim<Chunk> {
         Faction faction;
         switch (type) {
             case WILDERNESS:
-                faction = factions.get(FOPlugin.WILDERNESS_ID);
+                faction = FactionColl.get(LFPlugin.WILDERNESS_ID);
                 break;
             case SAFE_ZONE:
-                faction = factions.get(FOPlugin.SAFE_ZONE_ID);
+                faction = FactionColl.get(LFPlugin.SAFE_ZONE_ID);
                 break;
             case WAR_ZONE:
-                faction = factions.get(FOPlugin.WAR_ZONE_ID);
+                faction = FactionColl.get(LFPlugin.WAR_ZONE_ID);
                 break;
             default:
                 return;
         }
-        Board.setFactionAt(faction, fLocation);
+        board.setFactionAt(faction, fLocation);
     }
 
     @Override

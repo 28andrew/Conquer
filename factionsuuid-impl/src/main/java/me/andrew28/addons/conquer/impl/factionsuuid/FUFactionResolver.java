@@ -41,6 +41,6 @@ public class FUFactionResolver extends FactionResolver {
 
     @Override
     public ConquerFaction getByClaim(ConquerClaim claim) {
-        return FUFaction.get(plugin, board.getFactionAt(((FUClaim) claim).getRawfLocation()));
+        return FUFaction.get(plugin, board.getFactionAt(((FUClaim) claim).getRawFLocation()));
     }
 }

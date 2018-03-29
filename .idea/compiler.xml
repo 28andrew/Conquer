@@ -14,6 +14,8 @@
       <module name="factionsone-impl_test" target="1.8" />
       <module name="factionsuuid-impl_main" target="1.8" />
       <module name="factionsuuid-impl_test" target="1.8" />
+      <module name="legacyfactions-impl_main" target="1.8" />
+      <module name="legacyfactions-impl_test" target="1.8" />
       <module name="mfactions-impl_main" target="1.8" />
       <module name="mfactions-impl_test" target="1.8" />
       <module name="onefactions-impl_main" target="1.8" />

@@ -25,9 +25,9 @@ import java.io.StreamCorruptedException;
  * @author Andrew Tran
  */
 public class FOPlugin extends FactionsPlugin {
-    public static String WILDERNESS_ID = "0";
-    public static String SAFE_ZONE_ID = "-1";
-    public static String WAR_ZONE_ID = "-2";
+    public static final String WILDERNESS_ID = "0";
+    public static final String SAFE_ZONE_ID = "-1";
+    public static final String WAR_ZONE_ID = "-2";
 
     private Factions factions;
     private FPlayers fPlayers;

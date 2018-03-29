@@ -103,6 +103,9 @@ class MSEventForwarder extends EventForwarder {
         ConquerFactionRelationEvent forwardEvent =
                 new ConquerFactionRelationEvent(faction, otherFaction, oldRelation, newRelation);
         callEvent(forwardEvent);
+        if (forwardEvent.isCancelled()) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler

@@ -5,4 +5,4 @@ version: @version@
 
 main: me.andrew28.addons.conquer.Conquer
 
-softdepend: [Skript,Factions]
+softdepend: [Skript, Factions, LegacyFactions]

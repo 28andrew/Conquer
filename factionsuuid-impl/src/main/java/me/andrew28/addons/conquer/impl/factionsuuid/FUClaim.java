@@ -105,7 +105,7 @@ public class FUClaim extends ConquerClaim<Chunk> {
         return fields;
     }
 
-    public FLocation getRawfLocation() {
+    public FLocation getRawFLocation() {
         return fLocation;
     }
 }

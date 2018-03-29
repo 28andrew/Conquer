@@ -26,7 +26,7 @@ public class EvtClaim extends SkriptEvent {
 
     @Override
     public boolean init(Literal<?>[] args, int matchedPattern, SkriptParser.ParseResult parseResult) {
-        claim = matchedPattern == 1;
+        claim = matchedPattern == 0;
         return true;
     }
 

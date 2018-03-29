@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.logging.Level;
 
 /**
@@ -18,6 +19,7 @@ import java.util.logging.Level;
  */
 public class Conquer extends JavaPlugin {
     private static Conquer instance;
+    private boolean usingSkript;
     private SkriptAddon addonInstance;
     private FactionsPlugin factions;
     private EventForwarder currentForwarder;
@@ -27,7 +29,15 @@ public class Conquer extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
+        usingSkript = getServer().getPluginManager().isPluginEnabled("Skript");
+        if (!usingSkript) {
+            getLogger().info("Skript is not installed, so Skript elements will not be registered. " +
+                    "Other plugins may still use Conquer's API though.");
+        }
+
         Metrics metrics = new Metrics(this);
+        metrics.addCustomChart(new Metrics.SimplePie("factions_plugin_name",
+                () -> factions == null ? "None" : factions.getName()));
 
         // Try using the default implementations
         loadFactions();
@@ -74,6 +84,25 @@ public class Conquer extends JavaPlugin {
         }
     }
 
+    public boolean isUsingSkript() {
+        return usingSkript;
+    }
+
+    public EventForwarder getCurrentForwarder() {
+        return currentForwarder;
+    }
+
+    public boolean hasRegisteredElements() {
+        return registeredElements;
+    }
+
+    public SkriptAddon getAddonInstance() {
+        if (addonInstance == null) {
+            addonInstance = Skript.registerAddon(this);
+        }
+        return addonInstance;
+    }
+
     public FactionsPlugin getFactions() {
         return factions;
     }
@@ -92,19 +121,12 @@ public class Conquer extends JavaPlugin {
         this.factions = factions;
         getLogger().warning("Using factions plugin: " + factions.getName());
 
-        if (!registeredElements) {
+        if (usingSkript && !registeredElements) {
             registerElements();
         }
     }
 
     public static Conquer getInstance() {
         return instance;
-    }
-
-    public SkriptAddon getAddonInstance() {
-        if (addonInstance == null) {
-            addonInstance = Skript.registerAddon(this);
-        }
-        return addonInstance;
     }
 }

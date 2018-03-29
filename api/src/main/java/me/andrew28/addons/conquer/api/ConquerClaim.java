@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * @author Andrew Tran
  */
-public abstract class ConquerClaim<T> implements FieldSerializable<ConquerClaim> {
+public abstract class ConquerClaim<T> implements SerializableToFields {
     public abstract T getRepresentation();
 
     public abstract ClaimType getType();

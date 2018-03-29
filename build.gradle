@@ -15,7 +15,7 @@ allprojects {
     apply plugin: 'java'
 
     group 'me.andrew28.addons'
-    version '1.1.2'
+    version '1.2.0'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -48,6 +48,10 @@ subprojects {
         // bStats Repository
         maven {
             url 'http://repo.bstats.org/content/repositories/releases/'
+        }
+        // JitPack Repository
+        maven {
+            url 'https://jitpack.io'
         }
     }
 
