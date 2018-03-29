@@ -31,7 +31,7 @@ public class ExprFactionRelations extends SimpleExpression<Relation> {
     static {
         Skript.registerExpression(ExprFactionRelations.class, Relation.class, ExpressionType.COMBINED,
                 "[the] relation[ship][s] (between|across|for|to|of) [the] [faction][s]" +
-                        " %conquerfactions% [and] [to] [the] [factions] %conquerfactions%");
+                        " %conquerfactions% [and] [to] [the] [faction][s] %conquerfactions%");
     }
 
     private Expression<ConquerFaction> factions, otherFactions;
