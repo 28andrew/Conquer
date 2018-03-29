@@ -59,7 +59,7 @@ public class ExprFactionAtLocClaim extends SimpleExpression<ConquerFaction> {
 
     @Override
     public boolean isSingle() {
-        return false;
+        return targets.isSingle();
     }
 
     @Override
