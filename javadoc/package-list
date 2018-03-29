@@ -1,0 +1,15 @@
+me.andrew28.addons.conquer
+me.andrew28.addons.conquer.api
+me.andrew28.addons.conquer.api.events
+me.andrew28.addons.conquer.api.sender
+me.andrew28.addons.conquer.impl.factionsone
+me.andrew28.addons.conquer.impl.factionsuuid
+me.andrew28.addons.conquer.impl.legacyfactions
+me.andrew28.addons.conquer.impl.mfactions
+me.andrew28.addons.conquer.impl.savagefactions
+me.andrew28.addons.conquer.skript
+me.andrew28.addons.conquer.skript.conditions
+me.andrew28.addons.conquer.skript.effects
+me.andrew28.addons.conquer.skript.events
+me.andrew28.addons.conquer.skript.expressions
+me.andrew28.addons.conquer.util
