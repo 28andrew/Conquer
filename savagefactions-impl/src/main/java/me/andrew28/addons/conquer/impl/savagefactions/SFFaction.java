@@ -15,9 +15,11 @@ import me.andrew28.addons.conquer.api.sender.MessageOnlySender;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 
+import java.util.AbstractList;
 import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
@@ -373,6 +375,41 @@ public class SFFaction extends ConquerFaction {
     @Override
     public void setCheckpoint(Location location) {
         faction.setCheckpoint(location);
+    }
+
+    @Override
+    public List<String> getRules() {
+        return new AbstractList<String>() {
+            @Override
+            public String get(int index) {
+                return faction.getRule(index);
+            }
+
+            @Override
+            public String remove(int index) {
+                String old = null;
+                if (faction.getRulesMap().containsKey(index)) {
+                    old = faction.getRulesMap().get(index);
+                }
+                faction.getRulesMap().remove(index);
+                return old;
+            }
+
+            @Override
+            public void add(int index, String element) {
+                faction.getRulesMap().put(index, element);
+            }
+
+            @Override
+            public int size() {
+                return faction.getRulesMap().size();
+            }
+
+            @Override
+            public void clear() {
+                faction.getRulesMap().clear();
+            }
+        };
     }
 
     @Override
