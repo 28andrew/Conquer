@@ -167,6 +167,8 @@ public class SFPlugin extends FactionsPlugin {
         switch (fRole) {
             case ADMIN:
                 return ConquerPlayer.Role.ADMIN;
+            case COLEADER:
+                return ConquerPlayer.Role.COADMIN;
             case MODERATOR:
                 return ConquerPlayer.Role.MODERATOR;
             case NORMAL:
@@ -181,19 +183,22 @@ public class SFPlugin extends FactionsPlugin {
         if (role == null) {
             return null;
         }
-        com.massivecraft.factions.struct.Role fRole = null;
+        Role fRole = null;
         switch (role) {
             case NORMAL:
-                fRole = com.massivecraft.factions.struct.Role.NORMAL;
+                fRole = Role.NORMAL;
                 break;
             case ADMIN:
-                fRole = com.massivecraft.factions.struct.Role.ADMIN;
+                fRole = Role.ADMIN;
+                break;
+            case COADMIN:
+                fRole = Role.COLEADER;
                 break;
             case MODERATOR:
-                fRole = com.massivecraft.factions.struct.Role.MODERATOR;
+                fRole = Role.MODERATOR;
                 break;
             case RECRUIT:
-                fRole = com.massivecraft.factions.struct.Role.RECRUIT;
+                fRole = Role.RECRUIT;
                 break;
         }
         return fRole;

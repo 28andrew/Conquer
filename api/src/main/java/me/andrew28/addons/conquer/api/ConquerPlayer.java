@@ -32,6 +32,6 @@ public abstract class ConquerPlayer implements PowerHolder {
     public abstract OfflinePlayer getOfflinePlayer();
 
     public enum Role {
-        NORMAL, ADMIN, MODERATOR, RECRUIT, OTHER
+        NORMAL, COADMIN, ADMIN, MODERATOR, RECRUIT, OTHER
     }
 }

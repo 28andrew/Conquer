@@ -165,6 +165,8 @@ public class LFPlugin extends FactionsPlugin {
         switch (fRole) {
             case ADMIN:
                 return ConquerPlayer.Role.ADMIN;
+            case COLEADER:
+                return ConquerPlayer.Role.COADMIN;
             case MODERATOR:
                 return ConquerPlayer.Role.MODERATOR;
             case NORMAL:
@@ -180,10 +182,14 @@ public class LFPlugin extends FactionsPlugin {
         switch (role) {
             case NORMAL:
                 return Role.NORMAL;
+            case COADMIN:
+                return Role.COLEADER;
             case ADMIN:
                 return Role.ADMIN;
             case MODERATOR:
                 return Role.MODERATOR;
+            case OTHER:
+                break;
         }
         return null;
     }

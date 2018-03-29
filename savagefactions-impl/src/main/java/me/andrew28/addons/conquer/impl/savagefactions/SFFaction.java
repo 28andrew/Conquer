@@ -351,6 +351,21 @@ public class SFFaction extends ConquerFaction {
     }
 
     @Override
+    public int getTNT() {
+        return faction.getTnt();
+    }
+
+    @Override
+    public void addTNT(int amount) {
+        faction.addTnt(amount);
+    }
+
+    @Override
+    public void removeTNT(int amount) {
+        faction.takeTnt(amount);
+    }
+
+    @Override
     public Fields serialize() {
         Fields fields = new Fields();
         fields.putObject("id", faction.getId());

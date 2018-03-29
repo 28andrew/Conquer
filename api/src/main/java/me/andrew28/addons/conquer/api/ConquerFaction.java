@@ -67,4 +67,28 @@ public abstract class ConquerFaction implements PowerHolder, SerializableToField
     public abstract void unclaim(Location location);
 
     public abstract void disband();
+
+    public int getTNT() {
+        return 0;
+    }
+
+    public void addTNT(int amount) {
+
+    }
+
+    public void removeTNT(int amount) {
+
+    }
+
+    public void setTNT(int amount) {
+        int currentAmount = getTNT();
+        if (amount == currentAmount) {
+            return;
+        }
+        if (amount > currentAmount) {
+            addTNT(amount - currentAmount);
+        } else {
+            removeTNT(currentAmount - amount);
+        }
+    }
 }

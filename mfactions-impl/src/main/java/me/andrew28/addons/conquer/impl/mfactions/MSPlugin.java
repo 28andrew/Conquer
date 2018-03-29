@@ -187,6 +187,8 @@ public class MSPlugin extends FactionsPlugin {
             case RECRUIT:
                 rel = Rel.RECRUIT;
                 break;
+            case OTHER:
+                break;
         }
         return rel;
     }
