@@ -1,3 +1,8 @@
+/*
+Main Tasks:
+- build
+- aggregateJavadocs
+ */
 import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
@@ -6,9 +11,9 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.2'
+        classpath 'com.netflix.nebula:gradle-aggregate-javadocs-plugin:2.2.+'
     }
 }
-
 
 allprojects {
     apply plugin: 'com.github.johnrengelman.shadow'
@@ -69,6 +74,8 @@ subprojects {
     }
 }
 
+apply plugin: 'nebula-aggregate-javadocs'
+
 // Combine all modules into one jar
 subprojects.each { subproject -> evaluationDependsOn(subproject.path)}
 task allJar(type: Jar, dependsOn: subprojects.shadowJar) {
@@ -77,6 +84,12 @@ task allJar(type: Jar, dependsOn: subprojects.shadowJar) {
         from subproject.configurations.archives.allArtifacts.files.collect {
             zipTree(it)
         }
+    }
+}
+
+tasks.withType(Javadoc) {
+    options {
+        links 'https://docs.oracle.com/javase/8/docs/api/', 'http://hub.spigotmc.org/javadocs/spigot/', 'http://nfell2009.uk/skript/javadoc/'
     }
 }
 

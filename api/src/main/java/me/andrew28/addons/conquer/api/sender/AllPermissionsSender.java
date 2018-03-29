@@ -3,6 +3,7 @@ package me.andrew28.addons.conquer.api.sender;
 import org.bukkit.permissions.Permission;
 
 /**
+ * A message-only command sender implementation that has all permissions
  * @author Andrew Tran
  */
 public class AllPermissionsSender extends MessageOnlySender {

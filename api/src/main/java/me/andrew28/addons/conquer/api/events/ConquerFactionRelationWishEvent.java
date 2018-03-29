@@ -8,6 +8,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 /**
+ * The event called when a faction wishes to change relations with another faction
  * @author Andrew Tran
  */
 public class ConquerFactionRelationWishEvent extends Event implements Cancellable {
@@ -17,6 +18,14 @@ public class ConquerFactionRelationWishEvent extends Event implements Cancellabl
     private ConquerFaction sender, target;
     private Relation oldRelation, newRelation;
 
+    /**
+     * Creates a new faction relation change wish event
+     * @param caller the player that initiated the change
+     * @param sender the faction of the player that initiated the change
+     * @param target the targeted faction
+     * @param oldRelation the old relation
+     * @param newRelation the new relation
+     */
     public ConquerFactionRelationWishEvent(ConquerPlayer caller, ConquerFaction sender, ConquerFaction target,
                                            Relation oldRelation, Relation newRelation) {
         this.caller = caller;
@@ -26,22 +35,42 @@ public class ConquerFactionRelationWishEvent extends Event implements Cancellabl
         this.newRelation = newRelation;
     }
 
+    /**
+     * Gets the player that initiated the change
+     * @return the player that initiated the change
+     */
     public ConquerPlayer getCaller() {
         return caller;
     }
 
+    /**
+     * Gets the faction of the player that initiated the change
+     * @return the faction of the player that initiated the change
+     */
     public ConquerFaction getSender() {
         return sender;
     }
 
+    /**
+     * Gets the targeted faction
+     * @return the targeted faction
+     */
     public ConquerFaction getTarget() {
         return target;
     }
 
+    /**
+     * Gets the old relation
+     * @return the old relation
+     */
     public Relation getOldRelation() {
         return oldRelation;
     }
 
+    /**
+     * Gets the new relation
+     * @return the new relation
+     */
     public Relation getNewRelation() {
         return newRelation;
     }

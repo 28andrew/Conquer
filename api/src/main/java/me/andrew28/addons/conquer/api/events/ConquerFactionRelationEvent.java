@@ -7,6 +7,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 /**
+ * The event called when the relations change between two factions
  * @author Andrew Tran
  */
 public class ConquerFactionRelationEvent extends Event implements Cancellable {
@@ -15,6 +16,13 @@ public class ConquerFactionRelationEvent extends Event implements Cancellable {
     private Relation oldRelation, newRelation;
     private boolean cancelled;
 
+    /**
+     * Creates a new faction relation change event
+     * @param sender the faction that initiated the change
+     * @param target the targeted faction
+     * @param oldRelation the old relation
+     * @param newRelation the new relation
+     */
     public ConquerFactionRelationEvent(ConquerFaction sender, ConquerFaction target, Relation oldRelation, Relation newRelation) {
         this.sender = sender;
         this.target = target;
@@ -22,18 +30,34 @@ public class ConquerFactionRelationEvent extends Event implements Cancellable {
         this.newRelation = newRelation;
     }
 
+    /**
+     * Gets the faction that initiated the change
+     * @return the faction that initiated the change
+     */
     public ConquerFaction getSender() {
         return sender;
     }
 
+    /**
+     * Gets the targeted faction
+     * @return the targeted faction
+     */
     public ConquerFaction getTarget() {
         return target;
     }
 
+    /**
+     * Gets the old relation
+     * @return the old relation
+     */
     public Relation getOldRelation() {
         return oldRelation;
     }
 
+    /**
+     * Gets the new relation
+     * @return the new relation
+     */
     public Relation getNewRelation() {
         return newRelation;
     }

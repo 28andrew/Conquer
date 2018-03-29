@@ -6,6 +6,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 /**
+ * An event that involves both a player and a faction, not necessarily the faction of that player
  * @author Andrew Tran
  */
 public class ConquerPlayerFactionEvent extends Event {
@@ -13,15 +14,28 @@ public class ConquerPlayerFactionEvent extends Event {
     private ConquerFaction faction;
     private ConquerPlayer player;
 
+    /**
+     * Creates an event that involves both a player and a faction
+     * @param faction the faction involved
+     * @param player the player involved
+     */
     public ConquerPlayerFactionEvent(ConquerFaction faction, ConquerPlayer player) {
         this.faction = faction;
         this.player = player;
     }
 
+    /**
+     * Gets the faction involved
+     * @return the faction involved
+     */
     public ConquerFaction getFaction() {
         return faction;
     }
 
+    /**
+     * Gets the player involved
+     * @return  the player involved
+     */
     public ConquerPlayer getPlayer() {
         return player;
     }

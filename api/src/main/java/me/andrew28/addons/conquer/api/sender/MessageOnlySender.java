@@ -12,6 +12,8 @@ import org.bukkit.plugin.Plugin;
 import java.util.Set;
 
 /**
+ * A command sender that can only receive messages, nothing more.
+ * Throws {@link UnsupportedOperationException} on most methods that aren't message-related
  * @author Andrew Tran
  */
 public abstract class MessageOnlySender implements CommandSender {
@@ -125,5 +127,9 @@ public abstract class MessageOnlySender implements CommandSender {
     @Override
     public void setOp(boolean b) {
         throw new UnsupportedOperationException();
+    }
+
+    public boolean supportsName() {
+        return supportsName;
     }
 }
