@@ -366,6 +366,16 @@ public class SFFaction extends ConquerFaction {
     }
 
     @Override
+    public Location getCheckpoint() {
+        return faction.getCheckpoint();
+    }
+
+    @Override
+    public void setCheckpoint(Location location) {
+        faction.setCheckpoint(location);
+    }
+
+    @Override
     public Fields serialize() {
         Fields fields = new Fields();
         fields.putObject("id", faction.getId());

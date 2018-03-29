@@ -91,4 +91,12 @@ public abstract class ConquerFaction implements PowerHolder, SerializableToField
             removeTNT(currentAmount - amount);
         }
     }
+
+    public Location getCheckpoint() {
+        return null;
+    }
+
+    public void setCheckpoint(Location location) {
+
+    }
 }
