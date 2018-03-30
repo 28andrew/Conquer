@@ -1,5 +1,3 @@
-# Conquer [![Build Status](https://travis-ci.org/xXAndrew28Xx/Conquer.svg?branch=master)](https://travis-ci.org/xXAndrew28Xx/Conquer) [![Read the Docs](https://img.shields.io/readthedocs/pip.svg)](https://xxandrew28xx.github.io/Conquer/javadoc/index.html)
+# Conquer [![Build Status](https://travis-ci.org/xXAndrew28Xx/Conquer.svg?branch=master)](https://travis-ci.org/xXAndrew28Xx/Conquer) [![Read the Docs](https://img.shields.io/readthedocs/pip.svg)](https://xxandrew28xx.github.io/Conquer/javadoc/index.html) [![Spigot Resource](https://img.shields.io/badge/dynamic/json.svg?label=spigot%20resource&url=https%3A%2F%2Fapi.spiget.org%2Fv2%2Fresources%2F41246%2Fversions%3Fsize%3D1%26sort%3D-releaseDate%26fields%3Dname&query=%24%5B0%5D.name&colorB=ed8106)](https://www.spigotmc.org/resources/skript-addon-conquer.41246/)
 
 A Skript Addon which adds support for multiple Factions plugins to [Skript](https://github.com/bensku/Skript).
-
-[Spigot Resource](https://www.spigotmc.org/resources/skript-addon-conquer.41246/)
