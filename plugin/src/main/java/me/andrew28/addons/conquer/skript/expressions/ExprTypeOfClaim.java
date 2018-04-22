@@ -15,12 +15,12 @@ import org.bukkit.event.Event;
 @Name("Type of Claim")
 @Description("Gets the type of a claim")
 @Examples({
-        "if type of claim at player is wilderness:",
+        "if claim type of claim at player is wilderness:",
         "\tsend \"Open up your Pokemon GO app and catch them all (especially Pikachu)!\""
 })
 public class ExprTypeOfClaim extends SimplePropertyExpression<ConquerClaim, ClaimType> {
     static {
-        register(ExprTypeOfClaim.class, ClaimType.class, "[claim] type", "conquerclaims");
+        register(ExprTypeOfClaim.class, ClaimType.class, "(claim[ed]|chunk) type", "conquerclaims");
     }
 
     @Override
